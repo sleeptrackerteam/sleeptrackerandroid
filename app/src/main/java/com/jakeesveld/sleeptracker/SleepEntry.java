@@ -1,7 +1,9 @@
 package com.jakeesveld.sleeptracker;
 
-public class SleepEntry {
-    private int id, tiredRating, wakeMoodRating, averageMoodRating;
+import java.io.Serializable;
+
+public class SleepEntry implements Serializable {
+    private int id, tiredRating, wakeMoodRating, averageMoodRating, wakeTime, bedTime;
     private Float timeSlept;
     private String date;
 
@@ -68,5 +70,21 @@ public class SleepEntry {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getWakeTime() {
+        return wakeTime;
+    }
+
+    public void setWakeTime(int wakeTime) {
+        this.wakeTime = wakeTime;
+    }
+
+    public int getBedTime() {
+        return bedTime;
+    }
+
+    public void setBedTime(int bedTime) {
+        this.bedTime = bedTime;
     }
 }
