@@ -1,12 +1,17 @@
 package com.jakeesveld.sleeptracker;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +19,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 
 public class NewEntryFragment extends Fragment {
 
+    public static final int BED_TIME_REQUEST = 11;
+    public static final int WAKE_TIME_REQUEST = 12;
+    public static final int DATE_REQUEST = 13;
+    public static final String TIME_PICKER_TAG = "Time Picker";
+    public static final String DATE_PICKER_TAG = "Date Picker";
     EditText editDate, editBedTime, editWakeTime;
     ImageView tired1, tired2, tired3, tired4, wake1, wake2, wake3, wake4, average1, average2, average3, average4;
     Button buttonDatePicker, buttonBedTimePicker, buttonWakeTimePicker, buttonSubmit;
@@ -78,6 +91,39 @@ public class NewEntryFragment extends Fragment {
         average2.setOnClickListener(listener);
         average3.setOnClickListener(listener);
         average4.setOnClickListener(listener);
+
+        buttonBedTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment fragment = new TimePickerFragment();
+                fragment.setTargetFragment(NewEntryFragment.this, BED_TIME_REQUEST);
+                if(getFragmentManager() != null){
+                    fragment.show(getFragmentManager(), TIME_PICKER_TAG);
+                }
+            }
+        });
+
+        buttonWakeTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment fragment = new TimePickerFragment();
+                fragment.setTargetFragment(NewEntryFragment.this, WAKE_TIME_REQUEST);
+                if(getFragmentManager() != null){
+                    fragment.show(getFragmentManager(), TIME_PICKER_TAG);
+                }
+            }
+        });
+
+        buttonDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment fragment = new DatePickerFragment();
+                fragment.setTargetFragment(NewEntryFragment.this, DATE_REQUEST);
+                if(getFragmentManager() != null){
+                    fragment.show(getFragmentManager(), DATE_PICKER_TAG);
+                }
+            }
+        });
     }
 
     @Override
@@ -99,6 +145,20 @@ public class NewEntryFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == BED_TIME_REQUEST && resultCode == Activity.RESULT_OK){
+            String bedTime = data.getStringExtra(TimePickerFragment.TIME_EXTRA_KEY);
+            editBedTime.setText(bedTime);
+        }else if(requestCode == WAKE_TIME_REQUEST && resultCode == Activity.RESULT_OK){
+            String wakeTime = data.getStringExtra(TimePickerFragment.TIME_EXTRA_KEY);
+            editWakeTime.setText(wakeTime);
+        }else if(requestCode == DATE_REQUEST && resultCode == Activity.RESULT_OK){
+            String date = data.getStringExtra(DatePickerFragment.DATE_EXTRA_KEY);
+            editDate.setText(date);
+        }
     }
 
     final ImageView.OnClickListener listener = new ImageView.OnClickListener() {

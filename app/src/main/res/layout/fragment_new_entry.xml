@@ -26,7 +26,7 @@
         android:id="@+id/edit_date"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
-        android:hint="mm/dd/yyy"
+        android:hint="YYYY-MM-DD"
         app:layout_constraintStart_toEndOf="@id/text_date"
         android:layout_width="0dp"
         android:layout_weight="1"

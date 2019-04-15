@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class SleepEntry implements Serializable {
     public static final String SLEEP_ENTRY_KEY = "Sleep Entry";
-    private int id, tiredRating, wakeMoodRating, averageMoodRating, wakeTime, bedTime;
+    private int id, tiredRating, wakeMoodRating, averageMoodRating;
     private Float timeSlept;
-    private String date;
+    private String date, wakeTime, bedTime;
 
     public SleepEntry(int id, int tiredRating, int wakeMoodRating, int averageMoodRating, Float timeSlept, String date) {
         this.id = id;
@@ -73,19 +73,19 @@ public class SleepEntry implements Serializable {
         this.date = date;
     }
 
-    public int getWakeTime() {
+    public String getWakeTime() {
         return wakeTime;
     }
 
-    public void setWakeTime(int wakeTime) {
+    public void setWakeTime(String wakeTime) {
         this.wakeTime = wakeTime;
     }
 
-    public int getBedTime() {
+    public String getBedTime() {
         return bedTime;
     }
 
-    public void setBedTime(int bedTime) {
+    public void setBedTime(String bedTime) {
         this.bedTime = bedTime;
     }
 }
