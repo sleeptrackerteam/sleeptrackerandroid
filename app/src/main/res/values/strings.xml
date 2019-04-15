@@ -5,4 +5,9 @@
     <string name="title_home">Settings</string>
     <string name="title_dashboard">Create New Entry</string>
     <string name="title_notifications">Your Sleep Breakdown</string>
+    <string name="mood_rating_placeholder">Mood Rating: 4</string>
+    <string name="tired_rating_placeholder">Tired Rating: 3</string>
+    <string name="wake_time_placeholder">Wake Time: 8am</string>
+    <string name="bed_time_placeholder">Bed Time: 8pm</string>
+    <string name="text_date_placeholder">Entry Date: 4/15/2019</string>
 </resources>
