@@ -20,6 +20,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
+        tools:listitem="@layout/home_list_item"
         app:layout_constraintBottom_toTopOf="@id/navigation"
         app:layout_constraintTop_toBottomOf="@id/image_graph"
         android:layout_width="match_parent"

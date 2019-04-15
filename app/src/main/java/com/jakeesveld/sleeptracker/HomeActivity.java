@@ -61,13 +61,12 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction
-                        .add(R.id.container, new NewEntryFragment())
+                        .replace(R.id.container, new NewEntryFragment())
                         .addToBackStack(null)
                         .commit();
             }
         });
     }
-
 
     @Override
     public void onFragmentInteraction(Uri uri) {
