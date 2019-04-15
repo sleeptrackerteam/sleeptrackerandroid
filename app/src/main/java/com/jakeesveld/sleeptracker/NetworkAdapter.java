@@ -1,9 +1,12 @@
 package com.jakeesveld.sleeptracker;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,13 +14,27 @@ import java.net.URL;
 public class NetworkAdapter {
 
     public String httpRequest(String urlString){
+        return httpRequest(urlString, null, null);
+    }
+
+    public String httpRequest(String urlString, String requestMethod, JSONObject requestBody){
         String result = "";
         HttpURLConnection connection = null;
         InputStream stream = null;
         try{
             URL url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
-            connection.connect();
+
+
+            if((requestMethod.equals("POST") || requestMethod.equals("PUT")) && requestBody != null){
+                connection.setDoInput(true);
+                final OutputStream outputStream = connection.getOutputStream();
+
+                outputStream.write(requestBody.toString().getBytes());
+                outputStream.close();
+            }else{
+                connection.connect();
+            }
 
             if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
                 stream = connection.getInputStream();

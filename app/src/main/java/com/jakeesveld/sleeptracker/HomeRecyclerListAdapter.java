@@ -40,7 +40,7 @@ public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerLi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(viewHolder.parent.getContext(), BreakdownActivity.class);
-                intent.putExtra("Sleep Entry", data);
+                intent.putExtra(SleepEntry.SLEEP_ENTRY_KEY, data);
                 ((Activity)viewHolder.parent.getContext()).startActivity(intent);
             }
         });

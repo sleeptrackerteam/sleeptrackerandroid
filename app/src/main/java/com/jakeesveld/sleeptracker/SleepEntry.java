@@ -3,6 +3,7 @@ package com.jakeesveld.sleeptracker;
 import java.io.Serializable;
 
 public class SleepEntry implements Serializable {
+    public static final String SLEEP_ENTRY_KEY = "Sleep Entry";
     private int id, tiredRating, wakeMoodRating, averageMoodRating, wakeTime, bedTime;
     private Float timeSlept;
     private String date;
