@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".NewEntryFragment">
+
+    <LinearLayout
+        android:id="@+id/layout_date"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/text_date"
+        android:textSize="32sp"
+        android:text="Enter Date:"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_date"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        android:hint="mm/dd/yyy"
+        app:layout_constraintStart_toEndOf="@id/text_date"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="Pick Date"
+        android:id="@+id/button_pick_date"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/edit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_bed_time"
+        app:layout_constraintTop_toBottomOf="@id/layout_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/text_bed_time"
+        android:textSize="32sp"
+        android:text="Bedtime:"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_bed_time"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        android:hint="hh:mm"
+        app:layout_constraintStart_toEndOf="@id/text_date"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/button_bed_time"
+        android:text="Pick Time"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/edit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_wake_time"
+        app:layout_constraintTop_toBottomOf="@id/layout_bed_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/text_wake_time"
+        android:textSize="28sp"
+        android:text="Wake Time:"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/edit_wake_time"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        android:hint="hh:mm"
+        app:layout_constraintStart_toEndOf="@id/text_date"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/button_wake_time"
+        android:text="Pick Time"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/edit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/layout_wake_time"
+        android:textSize="32sp"
+        android:textAlignment="center"
+        android:text="Tired Rating at bed time"
+        android:id="@+id/text_tired_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/text_tired_rating"
+        android:id="@+id/layout_tired_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_tired_1"
+            android:src="@drawable/frown"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_tired_2"
+            android:src="@drawable/meh"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_tired_3"
+            android:src="@drawable/smile"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_tired_4"
+            android:src="@drawable/big_smile"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+    app:layout_constraintTop_toBottomOf="@id/layout_tired_rating"
+    android:textSize="32sp"
+    android:textAlignment="center"
+    android:text="Mood When Waking"
+    android:id="@+id/text_wake_mood_rating"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/text_wake_mood_rating"
+        android:id="@+id/layout_wake_mood_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_wake_1"
+            android:src="@drawable/frown"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_wake_2"
+            android:src="@drawable/meh"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_wake_3"
+            android:src="@drawable/smile"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_wake_4"
+            android:src="@drawable/big_smile"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/layout_wake_mood_rating"
+        android:textSize="32sp"
+        android:textAlignment="center"
+        android:text="Average Mood for Day"
+        android:id="@+id/text_average_mood_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/text_average_mood_rating"
+        android:id="@+id/layout_average_mood_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_average_1"
+            android:src="@drawable/frown"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_average_2"
+            android:src="@drawable/meh"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_average_3"
+            android:src="@drawable/smile"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_average_4"
+            android:src="@drawable/big_smile"
+            android:adjustViewBounds="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:layout_margin="10dp"
+        android:text="Submit Sleep Entry"
+        android:id="@+id/button_submit"
+        app:layout_constraintTop_toBottomOf="@id/layout_average_mood_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</android.support.constraint.ConstraintLayout>

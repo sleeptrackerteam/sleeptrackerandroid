@@ -10,4 +10,7 @@
     <string name="wake_time_placeholder">Wake Time: 8am</string>
     <string name="bed_time_placeholder">Bed Time: 8pm</string>
     <string name="text_date_placeholder">Entry Date: 4/15/2019</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
