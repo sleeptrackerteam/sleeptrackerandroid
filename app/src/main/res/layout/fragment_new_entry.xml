@@ -194,56 +194,12 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <TextView
-        app:layout_constraintTop_toBottomOf="@id/layout_wake_mood_rating"
-        android:textSize="32sp"
-        android:textAlignment="center"
-        android:text="Average Mood for Day"
-        android:id="@+id/text_average_mood_rating"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/text_average_mood_rating"
-        android:id="@+id/layout_average_mood_rating"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/image_average_1"
-            android:src="@drawable/frown"
-            android:adjustViewBounds="true"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/image_average_2"
-            android:src="@drawable/meh"
-            android:adjustViewBounds="true"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/image_average_3"
-            android:src="@drawable/smile"
-            android:adjustViewBounds="true"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/image_average_4"
-            android:src="@drawable/big_smile"
-            android:adjustViewBounds="true"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
     <Button
         android:layout_margin="10dp"
         android:text="Submit Sleep Entry"
         android:id="@+id/button_submit"
-        app:layout_constraintTop_toBottomOf="@id/layout_average_mood_rating"
+        app:layout_constraintTop_toBottomOf="@id/layout_wake_mood_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

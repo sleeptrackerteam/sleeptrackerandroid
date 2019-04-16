@@ -1,18 +1,19 @@
 package com.jakeesveld.sleeptracker;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 public class SleepEntry implements Serializable {
     public static final String SLEEP_ENTRY_KEY = "Sleep Entry";
-    private int id, tiredRating, wakeMoodRating, averageMoodRating;
+    private int id, tiredRating, wakeMoodRating;
     private Float timeSlept;
-    private String date, wakeTime, bedTime;
+    private String date;
 
     public SleepEntry(int id, int tiredRating, int wakeMoodRating, int averageMoodRating, Float timeSlept, String date) {
         this.id = id;
         this.tiredRating = tiredRating;
         this.wakeMoodRating = wakeMoodRating;
-        this.averageMoodRating = averageMoodRating;
         this.timeSlept = timeSlept;
         this.date = date;
     }
@@ -20,7 +21,6 @@ public class SleepEntry implements Serializable {
     public SleepEntry(int tiredRating, int wakeMoodRating, int averageMoodRating, Float timeSlept, String date) {
         this.tiredRating = tiredRating;
         this.wakeMoodRating = wakeMoodRating;
-        this.averageMoodRating = averageMoodRating;
         this.timeSlept = timeSlept;
         this.date = date;
     }
@@ -49,13 +49,6 @@ public class SleepEntry implements Serializable {
         this.wakeMoodRating = wakeMoodRating;
     }
 
-    public int getAverageMoodRating() {
-        return averageMoodRating;
-    }
-
-    public void setAverageMoodRating(int averageMoodRating) {
-        this.averageMoodRating = averageMoodRating;
-    }
 
     public Float getTimeSlept() {
         return timeSlept;
@@ -73,19 +66,10 @@ public class SleepEntry implements Serializable {
         this.date = date;
     }
 
-    public String getWakeTime() {
-        return wakeTime;
-    }
-
-    public void setWakeTime(String wakeTime) {
-        this.wakeTime = wakeTime;
-    }
-
-    public String getBedTime() {
-        return bedTime;
-    }
-
-    public void setBedTime(String bedTime) {
-        this.bedTime = bedTime;
-    }
+/*    public JSONObject toJSON(){
+        JSONObject entryJson = new JSONObject();
+        entryJson.put("id", this.id);
+        entryJson.put()
+    }*/
 }
+/*sleep: {id, user_id, timeSlept, wakeMood, sleepMood, date-format(YYYY-MM-DD)}*/

@@ -32,9 +32,9 @@ public class NewEntryFragment extends Fragment {
     public static final String TIME_PICKER_TAG = "Time Picker";
     public static final String DATE_PICKER_TAG = "Date Picker";
     EditText editDate, editBedTime, editWakeTime;
-    ImageView tired1, tired2, tired3, tired4, wake1, wake2, wake3, wake4, average1, average2, average3, average4;
+    ImageView tired1, tired2, tired3, tired4, wake1, wake2, wake3, wake4;
     Button buttonDatePicker, buttonBedTimePicker, buttonWakeTimePicker, buttonSubmit;
-    static int tiredRating, wakeRating, averageRating;
+    static int tiredRating, wakeRating;
 
 
     private OnFragmentInteractionListener mListener;
@@ -70,10 +70,6 @@ public class NewEntryFragment extends Fragment {
         wake2 = view.findViewById(R.id.image_wake_2);
         wake3 = view.findViewById(R.id.image_wake_3);
         wake4 = view.findViewById(R.id.image_wake_4);
-        average1 = view.findViewById(R.id.image_average_1);
-        average2 = view.findViewById(R.id.image_average_2);
-        average3 = view.findViewById(R.id.image_average_3);
-        average4 = view.findViewById(R.id.image_average_4);
         buttonDatePicker = view.findViewById(R.id.button_pick_date);
         buttonBedTimePicker = view.findViewById(R.id.button_bed_time);
         buttonWakeTimePicker = view.findViewById(R.id.button_wake_time);
@@ -87,10 +83,6 @@ public class NewEntryFragment extends Fragment {
         wake2.setOnClickListener(listener);
         wake3.setOnClickListener(listener);
         wake4.setOnClickListener(listener);
-        average1.setOnClickListener(listener);
-        average2.setOnClickListener(listener);
-        average3.setOnClickListener(listener);
-        average4.setOnClickListener(listener);
 
         buttonBedTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,34 +213,6 @@ public class NewEntryFragment extends Fragment {
                     wake3.setImageDrawable(getResources().getDrawable(R.drawable.smile));
                     wake4.setImageDrawable(getResources().getDrawable(R.drawable.big_smile_selected));
                     wakeRating = 4;
-                    break;
-                case R.id.image_average_1:
-                    average1.setImageDrawable(getResources().getDrawable(R.drawable.frown_selected));
-                    average2.setImageDrawable(getResources().getDrawable(R.drawable.meh));
-                    average3.setImageDrawable(getResources().getDrawable(R.drawable.smile));
-                    average4.setImageDrawable(getResources().getDrawable(R.drawable.big_smile));
-                    averageRating = 1;
-                    break;
-                case R.id.image_average_2:
-                    average1.setImageDrawable(getResources().getDrawable(R.drawable.frown));
-                    average2.setImageDrawable(getResources().getDrawable(R.drawable.meh_selected));
-                    average3.setImageDrawable(getResources().getDrawable(R.drawable.smile));
-                    average4.setImageDrawable(getResources().getDrawable(R.drawable.big_smile));
-                    averageRating = 2;
-                    break;
-                case R.id.image_average_3:
-                    average1.setImageDrawable(getResources().getDrawable(R.drawable.frown));
-                    average2.setImageDrawable(getResources().getDrawable(R.drawable.meh));
-                    average3.setImageDrawable(getResources().getDrawable(R.drawable.smile_selected));
-                    average4.setImageDrawable(getResources().getDrawable(R.drawable.big_smile));
-                    averageRating = 3;
-                    break;
-                case R.id.image_average_4:
-                    average1.setImageDrawable(getResources().getDrawable(R.drawable.frown));
-                    average2.setImageDrawable(getResources().getDrawable(R.drawable.meh));
-                    average3.setImageDrawable(getResources().getDrawable(R.drawable.smile));
-                    average4.setImageDrawable(getResources().getDrawable(R.drawable.big_smile_selected));
-                    averageRating = 4;
                     break;
 
 

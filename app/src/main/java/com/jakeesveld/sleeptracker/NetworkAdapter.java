@@ -10,20 +10,37 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 public class NetworkAdapter {
 
-    public String httpRequest(String urlString){
-        return httpRequest(urlString, null, null);
+    public static String registerReqest(String urlString, JSONObject userInfo){
+        String token = httpRequest(urlString, "POST", userInfo, null);
+        return token;
     }
 
-    public String httpRequest(String urlString, String requestMethod, JSONObject requestBody){
+    public static String loginRequest(String urlString, JSONObject userInfo){
+        String token = httpRequest(urlString, "POST", userInfo, null);
+        return token;
+    }
+
+    public static String httpRequest(String urlString){
+        return httpRequest(urlString, null, null, null);
+    }
+
+    public static String httpRequest(String urlString, String requestMethod, JSONObject requestBody, Map<String, String> headerProperties){
         String result = "";
         HttpURLConnection connection = null;
         InputStream stream = null;
         try{
             URL url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
+
+            if (headerProperties != null) {
+                for (Map.Entry<String, String> property : headerProperties.entrySet()) {
+                    connection.setRequestProperty(property.getKey(), property.getValue());
+                }
+            }
 
 
             if((requestMethod.equals("POST") || requestMethod.equals("PUT")) && requestBody != null){
