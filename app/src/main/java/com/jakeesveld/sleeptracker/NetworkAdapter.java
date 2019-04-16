@@ -45,7 +45,8 @@ public class NetworkAdapter {
 
             if((requestMethod.equals("POST") || requestMethod.equals("PUT")) && requestBody != null){
                 connection.setDoInput(true);
-                final OutputStream outputStream = connection.getOutputStream();
+                connection.setRequestMethod(requestMethod);
+                OutputStream outputStream = connection.getOutputStream();
 
                 outputStream.write(requestBody.toString().getBytes());
                 outputStream.close();
@@ -53,6 +54,7 @@ public class NetworkAdapter {
                 connection.connect();
             }
 
+            int responseCode = connection.getResponseCode();
             if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
                 stream = connection.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(stream));

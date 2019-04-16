@@ -30,11 +30,9 @@ public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerLi
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final SleepEntry data = dataList.get(i);
 
-        viewHolder.textWakeTime.setText(data.getWakeTime());
         viewHolder.textTiredRating.setText(data.getTiredRating());
         viewHolder.textMoodRating.setText(data.getWakeMoodRating());
         viewHolder.textEntryDate.setText(data.getDate());
-        viewHolder.textBedTime.setText(data.getBedTime());
 
         viewHolder.parent.setOnClickListener(new View.OnClickListener() {
             @Override

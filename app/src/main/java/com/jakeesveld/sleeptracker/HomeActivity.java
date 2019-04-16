@@ -18,6 +18,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     public static final String FRAGMENT_KEY = "New Entry";
     Context context;
     private TextView mTextMessage;
+    public static SleepEntryDAO dao;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,6 +45,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         context = this;
+        dao = new SleepEntryDAO();
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
         mTextMessage = findViewById(R.id.message);
