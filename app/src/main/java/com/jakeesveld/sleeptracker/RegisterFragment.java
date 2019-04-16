@@ -2,11 +2,20 @@ package com.jakeesveld.sleeptracker;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -21,9 +30,10 @@ public class RegisterFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     private String mParam1;
     private String mParam2;
+    EditText editUsername, editPassword;
+    Button buttonSubmit;
 
     private OnFragmentInteractionListener mListener;
 
@@ -39,6 +49,7 @@ public class RegisterFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment RegisterFragment.
      */
+
     public static RegisterFragment newInstance(String param1, String param2) {
         RegisterFragment fragment = new RegisterFragment();
         Bundle args = new Bundle();
@@ -61,13 +72,35 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        editPassword = view.findViewById(R.id.edit_password);
+        editUsername = view.findViewById(R.id.edit_username);
+        buttonSubmit = view.findViewById(R.id.button_login);
+
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = editUsername.getText().toString();
+                String password = editPassword.getText().toString();
+
+                JSONObject userInfo = new JSONObject();
+                try {
+                    userInfo.put("username", username);
+                    userInfo.put("password", password);
+
+                    AsyncHandleLogin handleLogin = new AsyncHandleLogin();
+                    handleLogin.execute(userInfo);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     @Override
@@ -99,5 +132,22 @@ public class RegisterFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+    class AsyncHandleLogin extends AsyncTask<JSONObject, Integer, String> {
+
+        @Override
+        protected String doInBackground(JSONObject... jsonObjects) {
+            JSONObject userInfo = jsonObjects[0];
+            HomeActivity.dao.registerHandler(userInfo);
+            String result = "";
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Log.i("request", "success");
+            getActivity().onBackPressed();
+        }
     }
 }

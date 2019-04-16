@@ -86,7 +86,7 @@ public class LoginFragment extends DialogFragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = editUsername.getText().toString();
+                final String username = editUsername.getText().toString();
                 String password = editPassword.getText().toString();
 
                 JSONObject userInfo = new JSONObject();
@@ -148,6 +148,7 @@ public class LoginFragment extends DialogFragment {
         @Override
         protected void onPostExecute(String s) {
             Log.i("request", "success");
+            getActivity().onBackPressed();
         }
     }
 }

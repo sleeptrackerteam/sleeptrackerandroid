@@ -19,6 +19,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     Context context;
     private TextView mTextMessage;
     public static SleepEntryDAO dao;
+    public static UsersDAO usersDao;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

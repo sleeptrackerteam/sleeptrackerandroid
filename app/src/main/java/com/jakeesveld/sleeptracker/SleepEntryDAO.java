@@ -31,6 +31,10 @@ public class SleepEntryDAO {
         try {
             JSONObject resultJson = new JSONObject(result);
             SESSION_TOKEN = resultJson.getString("token");
+            String topIdString = resultJson.getString("message");
+            String[] idStringArray = topIdString.split(",");
+            String idString = idStringArray[1];
+            HomeActivity.usersDao.setUserId(Integer.parseInt(idString));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -39,17 +43,20 @@ public class SleepEntryDAO {
 
     public void registerHandler(JSONObject userInfo) {
         String urlString = URL_PREFIX + URL_AUTH_PREFIX + URL_REGISTER;
-        String result = NetworkAdapter.registerReqest(urlString, userInfo);
+        String result = NetworkAdapter.httpRequest(urlString, "POST", userInfo, headerProperties);
         try {
             JSONObject resultJson = new JSONObject(result);
             SESSION_TOKEN = resultJson.getString("token");
+            int userId = resultJson.getInt("id");
+            HomeActivity.usersDao.setUserId(userId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         headerProperties.put("Authorization", SESSION_TOKEN);
     }
 
-    public int getNextId() {
+
+    public int getUserId(String username) {
         int id = 0;
         String urlString = URL_PREFIX + URL_GET_USERS;
         String result = NetworkAdapter.httpRequest(urlString, "GET", null, headerProperties);
@@ -57,9 +64,9 @@ public class SleepEntryDAO {
             JSONArray resultJson = new JSONArray(result);
             for (int i = 0; i < resultJson.length(); ++i) {
                 JSONObject object = resultJson.getJSONObject(i);
-                int nextId = object.getInt("id");
-                if (nextId >= id) {
-                    id = nextId + 1;
+                String usernameJson = object.getString("username");
+                if(usernameJson.equals(username)){
+                    id = object.getInt("id");
                 }
             }
         } catch (JSONException e1) {
