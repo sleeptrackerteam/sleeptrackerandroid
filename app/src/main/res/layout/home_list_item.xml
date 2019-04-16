@@ -38,28 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp">
 
-            <LinearLayout
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
 
-                <TextView
-                    android:id="@+id/text_bed_time"
-                    android:textAlignment="center"
-                    android:text="@string/bed_time_placeholder"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/text_wake_time"
-                    android:textAlignment="center"
-                    android:text="@string/wake_time_placeholder"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_weight="1"
@@ -83,6 +62,14 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
+            <TextView
+                android:id="@+id/text_time_slept"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Time Slept: 8 hours"
+                android:textAlignment="center"
+                android:textStyle="bold"/>
         </LinearLayout>
 
 

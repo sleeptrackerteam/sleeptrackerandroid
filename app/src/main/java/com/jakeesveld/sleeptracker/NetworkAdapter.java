@@ -14,18 +14,10 @@ import java.util.Map;
 
 public class NetworkAdapter {
 
-    public static String registerReqest(String urlString, JSONObject userInfo){
-        String token = httpRequest(urlString, "POST", userInfo, null);
-        return token;
-    }
 
-    public static String loginRequest(String urlString, JSONObject userInfo){
-        String token = httpRequest(urlString, "POST", userInfo, null);
-        return token;
-    }
 
-    public static String httpRequest(String urlString){
-        return httpRequest(urlString, null, null, null);
+    public static String httpRequest(String urlString, Map<String, String> headerProperties){
+        return httpRequest(urlString, "GET", null, headerProperties);
     }
 
     public static String httpRequest(String urlString, String requestMethod, JSONObject requestBody, Map<String, String> headerProperties){

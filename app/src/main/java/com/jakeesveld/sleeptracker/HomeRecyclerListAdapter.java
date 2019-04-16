@@ -30,9 +30,10 @@ public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerLi
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final SleepEntry data = dataList.get(i);
 
-        viewHolder.textTiredRating.setText(data.getTiredRating());
-        viewHolder.textMoodRating.setText(data.getWakeMoodRating());
+        viewHolder.textTiredRating.setText("Tired Rating: " + (String.valueOf(data.getTiredRating())));
+        viewHolder.textMoodRating.setText("Mood Rating: " +(String.valueOf(data.getWakeMoodRating())));
         viewHolder.textEntryDate.setText(data.getDate());
+        viewHolder.textTimeSlept.setText("Time Slept: " + data.getTimeSlept() + " hours");
 
         viewHolder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,18 +53,17 @@ public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerLi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         View parent;
-        TextView textMoodRating, textTiredRating, textBedTime, textWakeTime, textEntryDate;
+        TextView textMoodRating, textTiredRating, textEntryDate, textTimeSlept;
         ImageView imageViewGraph;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parent = itemView.findViewById(R.id.layout_parent);
-            textBedTime = itemView.findViewById(R.id.text_bed_time);
             textEntryDate = itemView.findViewById(R.id.text_view_entry_date);
             textMoodRating = itemView.findViewById(R.id.text_mood_rating);
             textTiredRating = itemView.findViewById(R.id.text_tired_rating);
-            textWakeTime = itemView.findViewById(R.id.text_wake_time);
             imageViewGraph = itemView.findViewById(R.id.image_view_graph);
+            textTimeSlept = itemView.findViewById(R.id.text_time_slept);
         }
     }
 }

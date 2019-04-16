@@ -9,17 +9,25 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class HomeActivity extends AppCompatActivity implements NewEntryFragment.OnFragmentInteractionListener {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+public class HomeActivity extends AppCompatActivity implements NewEntryFragment.OnFragmentInteractionListener, LoginFragment.OnFragmentInteractionListener {
 
     public static final String FRAGMENT_KEY = "New Entry";
     Context context;
     private TextView mTextMessage;
     public static SleepEntryDAO dao;
     public static UsersDAO usersDao;
+    ArrayList<SleepEntry> entryList;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,6 +55,39 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         setContentView(R.layout.activity_home);
         context = this;
         dao = new SleepEntryDAO();
+        usersDao = new UsersDAO(context);
+        entryList = new ArrayList<>();
+        final HomeRecyclerListAdapter listAdapter = new HomeRecyclerListAdapter(entryList);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setAdapter(listAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        if (usersDao.getUserId() != 0) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject userInfo = new JSONObject();
+                    try {
+                        userInfo.put("username", usersDao.getUsername());
+                        userInfo.put("password", usersDao.getPassword());
+                        dao.loginHandler(userInfo);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    final ArrayList<SleepEntry> daoEntryList = dao.getAllEntries();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            entryList.addAll(daoEntryList);
+                            listAdapter.notifyDataSetChanged();
+                        }
+                    });
+
+                }
+            }).start();
+        }
+
+
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
         mTextMessage = findViewById(R.id.message);
@@ -72,7 +113,30 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+/*    public void refreshList(){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final ArrayList<SleepEntry> daoEntryList = dao.getAllEntries();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        entryList = daoEntryList;
+                        listAdapter.notifyDataSetChanged();
+                    }
+                });
+
+            }
+        }).start();
+    }*/
 }

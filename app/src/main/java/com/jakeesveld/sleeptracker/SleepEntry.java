@@ -1,16 +1,32 @@
 package com.jakeesveld.sleeptracker;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
 
 public class SleepEntry implements Serializable {
     public static final String SLEEP_ENTRY_KEY = "Sleep Entry";
-    private int id, tiredRating, wakeMoodRating;
-    private Float timeSlept;
+    private int id, tiredRating, wakeMoodRating, timeSlept;
     private String date;
 
-    public SleepEntry(int id, int tiredRating, int wakeMoodRating, int averageMoodRating, Float timeSlept, String date) {
+    public SleepEntry(JSONObject json){
+        /*        "timeSlept": 9,
+        "wakeMood": 4,
+        "sleepMood": 3,
+        "date": "2019-04-13"*/
+        try {
+            this.date = json.getString("date");
+            this.wakeMoodRating = json.getInt("wakeMood");
+            this.tiredRating = json.getInt("sleepMood");
+            this.timeSlept = json.getInt("timeSlept");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public SleepEntry(int id, int tiredRating, int wakeMoodRating, int averageMoodRating, int timeSlept, String date) {
         this.id = id;
         this.tiredRating = tiredRating;
         this.wakeMoodRating = wakeMoodRating;
@@ -18,7 +34,7 @@ public class SleepEntry implements Serializable {
         this.date = date;
     }
 
-    public SleepEntry(int tiredRating, int wakeMoodRating, int averageMoodRating, Float timeSlept, String date) {
+    public SleepEntry(int tiredRating, int wakeMoodRating, int averageMoodRating, int timeSlept, String date) {
         this.tiredRating = tiredRating;
         this.wakeMoodRating = wakeMoodRating;
         this.timeSlept = timeSlept;
@@ -50,11 +66,11 @@ public class SleepEntry implements Serializable {
     }
 
 
-    public Float getTimeSlept() {
+    public int getTimeSlept() {
         return timeSlept;
     }
 
-    public void setTimeSlept(Float timeSlept) {
+    public void setTimeSlept(int timeSlept) {
         this.timeSlept = timeSlept;
     }
 

@@ -148,7 +148,10 @@ public class LoginFragment extends DialogFragment {
         @Override
         protected void onPostExecute(String s) {
             Log.i("request", "success");
-            getActivity().onBackPressed();
+
+            if (getFragmentManager() != null) {
+                getFragmentManager().beginTransaction().remove(LoginFragment.this).commit();
+            }
         }
     }
 }
