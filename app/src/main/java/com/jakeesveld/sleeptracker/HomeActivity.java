@@ -28,6 +28,8 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     public static SleepEntryDAO dao;
     public static UsersDAO usersDao;
     ArrayList<SleepEntry> entryList;
+    HomeRecyclerListAdapter listAdapter;
+    TextView textViewGreeting;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,39 +56,16 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         context = this;
+        textViewGreeting = findViewById(R.id.text_view_greeting);
         dao = new SleepEntryDAO();
         usersDao = new UsersDAO(context);
         entryList = new ArrayList<>();
-        final HomeRecyclerListAdapter listAdapter = new HomeRecyclerListAdapter(entryList);
+        listAdapter = new HomeRecyclerListAdapter(entryList);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        if (usersDao.getUserId() != 0) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject userInfo = new JSONObject();
-                    try {
-                        userInfo.put("username", usersDao.getUsername());
-                        userInfo.put("password", usersDao.getPassword());
-                        dao.loginHandler(userInfo);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    final ArrayList<SleepEntry> daoEntryList = dao.getAllEntries();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            entryList.addAll(daoEntryList);
-                            listAdapter.notifyDataSetChanged();
-                        }
-                    });
-
-                }
-            }).start();
-        }
-
+        String greetingText = "Hello, " + usersDao.getUsername();
+        textViewGreeting.setText(greetingText);
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -115,6 +94,34 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     @Override
     protected void onResume() {
         super.onResume();
+        int userId = usersDao.getUserId();
+        if (usersDao.getUserId() != 0) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject userInfo = new JSONObject();
+                    try {
+                        userInfo.put("username", usersDao.getUsername());
+                        userInfo.put("password", usersDao.getPassword());
+                        dao.loginHandler(userInfo);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    final ArrayList<SleepEntry> daoEntryList = dao.getAllEntries();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            entryList.addAll(daoEntryList);
+                            listAdapter.notifyDataSetChanged();
+                            String greetingText = "Hello, " + usersDao.getUsername();
+                            textViewGreeting.setText(greetingText);
+                        }
+                    });
+
+                }
+            }).start();
+        }
     }
 
     @Override

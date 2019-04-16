@@ -7,12 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <TextView
+        android:id="@+id/text_view_greeting"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Hello!"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ImageView
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/ic_launcher_background"
         android:id="@+id/image_graph"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_greeting"
         android:adjustViewBounds="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
