@@ -89,6 +89,13 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                         .commit();
             }
         });
+
+        findViewById(R.id.navigation_breakdown).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, BreakdownActivity.class));
+            }
+        });
     }
 
     @Override

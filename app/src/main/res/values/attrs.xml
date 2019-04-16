@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SleepGraph">
+        <attr name="yEnd4" format="integer"/>
+        <attr name="yEnd5" format="integer"/>
+        <attr name="yEnd6" format="integer"/>
+        <attr name="yEnd7" format="integer"/>
+        <attr name="yEnd8" format="integer"/>
+        <attr name="yEnd9" format="integer"/>
+        <attr name="yEnd10" format="integer"/>
+        <attr name="yEnd11" format="integer"/>
+        <attr name="yEnd12" format="integer"/>
+    </declare-styleable>
+</resources>
