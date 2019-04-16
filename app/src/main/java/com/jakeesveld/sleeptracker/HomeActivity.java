@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     ArrayList<SleepEntry> entryList;
     HomeRecyclerListAdapter listAdapter;
     TextView textViewGreeting;
+    SleepGraph homeGraphView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -60,6 +61,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         dao = new SleepEntryDAO();
         usersDao = new UsersDAO(context);
         entryList = new ArrayList<>();
+        homeGraphView = findViewById(R.id.image_graph);
         listAdapter = new HomeRecyclerListAdapter(entryList);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setAdapter(listAdapter);
@@ -116,6 +118,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                     }
 
                     final ArrayList<SleepEntry> daoEntryList = dao.getAllEntries();
+                    final ArrayList<Integer> averagesList = dao.getAverages();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -123,6 +126,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                             listAdapter.notifyDataSetChanged();
                             String greetingText = "Hello, " + usersDao.getUsername();
                             textViewGreeting.setText(greetingText);
+                            homeGraphView.setYEndings(averagesList);
                         }
                     });
 

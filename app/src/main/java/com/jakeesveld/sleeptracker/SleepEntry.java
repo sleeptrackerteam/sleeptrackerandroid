@@ -20,6 +20,7 @@ public class SleepEntry implements Serializable {
             this.wakeMoodRating = json.getInt("wakeMood");
             this.tiredRating = json.getInt("sleepMood");
             this.timeSlept = json.getInt("timeSlept");
+            this.id = json.getInt("id");
         } catch (JSONException e) {
             e.printStackTrace();
         }

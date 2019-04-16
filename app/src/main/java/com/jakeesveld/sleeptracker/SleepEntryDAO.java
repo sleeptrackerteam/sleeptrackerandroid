@@ -32,9 +32,10 @@ public class SleepEntryDAO {
             JSONObject resultJson = new JSONObject(result);
             SESSION_TOKEN = resultJson.getString("token");
             String topIdString = resultJson.getString("message");
-            String[] idStringArray = topIdString.split(",");
+            /*String[] idStringArray = topIdString.split(",");
             String idString = idStringArray[1];
-            HomeActivity.usersDao.setUserId(Integer.parseInt(idString));
+            HomeActivity.usersDao.setUserId(Integer.parseInt(idString));*/
+            HomeActivity.usersDao.setUserId(resultJson.getInt("user_id"));
             HomeActivity.usersDao.setUsername(userInfo.getString("username"));
             HomeActivity.usersDao.setPassword(userInfo.getString("password"));
         } catch (JSONException e) {
@@ -74,6 +75,53 @@ public class SleepEntryDAO {
             e.printStackTrace();
         }
         return entries;
+    }
+
+    public ArrayList<Integer> getAverages(){
+        ArrayList<SleepEntry> entries = getAllEntries();
+        int avg4 = 0, avg5 = 0, avg6 = 0, avg7 = 0, avg8 = 0, avg9 = 0, avg10 = 0, avg11 = 0, avg12 = 0;
+        for(SleepEntry entry: entries){
+            switch(entry.getTimeSlept()){
+                case 4:
+                    avg4 += 1;
+                    break;
+                case 5:
+                    avg5 += 1;
+                    break;
+                case 6:
+                    avg6 += 1;
+                    break;
+                case 7:
+                    avg7 += 1;
+                    break;
+                case 8:
+                    avg8 += 1;
+                    break;
+                case 9:
+                    avg9 += 1;
+                    break;
+                case 10:
+                    avg10 += 1;
+                    break;
+                case 11:
+                    avg11 += 1;
+                    break;
+                case 12:
+                    avg12 += 1;
+                    break;
+            }
+        }
+        ArrayList<Integer> averageList = new ArrayList<>();
+        averageList.add(avg4);
+        averageList.add(avg5);
+        averageList.add(avg6);
+        averageList.add(avg7);
+        averageList.add(avg8);
+        averageList.add(avg9);
+        averageList.add(avg10);
+        averageList.add(avg11);
+        averageList.add(avg12);
+        return averageList;
     }
 
 /*
