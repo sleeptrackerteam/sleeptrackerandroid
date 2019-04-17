@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import org.json.JSONObject;
@@ -35,8 +36,11 @@ public class NewEntryFragment extends Fragment {
     public static final String DATE_PICKER_TAG = "Date Picker";
     EditText editDate, editBedTime, editWakeTime;
     ImageView tired1, tired2, tired3, tired4, wake1, wake2, wake3, wake4;
-    Button buttonDatePicker, buttonBedTimePicker, buttonWakeTimePicker, buttonSubmit;
+    Button buttonDatePicker, buttonBedTimePicker, buttonWakeTimePicker, buttonSubmit, buttonUpdate, buttonDelete;
     static int tiredRating, wakeRating;
+    SleepEntry updatableEntry;
+    TextView textTimeSlept;
+    int timeSlept;
 
 
     private OnFragmentInteractionListener mListener;
@@ -60,6 +64,17 @@ public class NewEntryFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null && getArguments().containsKey(SleepEntry.SLEEP_ENTRY_KEY)) {
+            updatableEntry = (SleepEntry) getArguments().getSerializable(SleepEntry.SLEEP_ENTRY_KEY);
+        }else{
+            updatableEntry= null;
+        }
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         editDate = view.findViewById(R.id.edit_date);
         editBedTime = view.findViewById(R.id.edit_bed_time);
@@ -76,6 +91,9 @@ public class NewEntryFragment extends Fragment {
         buttonBedTimePicker = view.findViewById(R.id.button_bed_time);
         buttonWakeTimePicker = view.findViewById(R.id.button_wake_time);
         buttonSubmit = view.findViewById(R.id.button_submit);
+        buttonUpdate = view.findViewById(R.id.button_update);
+        buttonDelete = view.findViewById(R.id.button_delete);
+        textTimeSlept = view.findViewById(R.id.text_view_time_slept);
 
         tired1.setOnClickListener(listener);
         tired2.setOnClickListener(listener);
@@ -85,6 +103,83 @@ public class NewEntryFragment extends Fragment {
         wake2.setOnClickListener(listener);
         wake3.setOnClickListener(listener);
         wake4.setOnClickListener(listener);
+
+        if(updatableEntry != null){
+            textTimeSlept.setText("Time Slept: " + updatableEntry.getTimeSlept() + " hours");
+            editDate.setText(updatableEntry.getDate());
+            switch (updatableEntry.getWakeMoodRating()){
+                case 1:
+                    wake1.setImageDrawable(getResources().getDrawable(R.drawable.frown_selected));
+                    wakeRating = 1;
+                    break;
+                case 2:
+                    wake2.setImageDrawable(getResources().getDrawable(R.drawable.meh_selected));
+                    wakeRating = 2;
+                    break;
+                case 3:
+                    wake3.setImageDrawable(getResources().getDrawable(R.drawable.smile_selected));
+                    wakeRating = 3;
+                    break;
+                case 4:
+                    wake4.setImageDrawable(getResources().getDrawable(R.drawable.big_smile_selected));
+                    wakeRating = 4;
+                    break;
+            }
+            switch (updatableEntry.getTiredRating()){
+                case 1:
+                    tired1.setImageDrawable(getResources().getDrawable(R.drawable.frown_selected));
+                    tiredRating = 1;
+                    break;
+                case 2:
+                    tired2.setImageDrawable(getResources().getDrawable(R.drawable.meh_selected));
+                    tiredRating = 2;
+                    break;
+                case 3:
+                    tired3.setImageDrawable(getResources().getDrawable(R.drawable.smile_selected));
+                    tiredRating = 3;
+                    break;
+                case 4:
+                    tired4.setImageDrawable(getResources().getDrawable(R.drawable.big_smile_selected));
+                    tiredRating = 4;
+                    break;
+            }
+
+            buttonUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updatableEntry.setTimeSlept(timeSlept);
+                    updatableEntry.setTiredRating(tiredRating);
+                    updatableEntry.setWakeMoodRating(wakeRating);
+                    updatableEntry.setDate(editDate.getText().toString());
+                    final JSONObject entryJson = updatableEntry.toJson();
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            HomeActivity.dao.updateEntry(entryJson, updatableEntry.getId());
+                            startActivity(new Intent(getContext(), HomeActivity.class));
+                        }
+                    }).start();
+                }
+            });
+
+            buttonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            HomeActivity.dao.deleteEntry(updatableEntry.getId());
+                            startActivity(new Intent(getContext(), HomeActivity.class));
+                        }
+                    }).start();
+                }
+            });
+
+        }else{
+            buttonDelete.setVisibility(View.GONE);
+            buttonUpdate.setVisibility(View.GONE);
+        }
 
         buttonBedTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,12 +217,6 @@ public class NewEntryFragment extends Fragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String bedTimeString = editBedTime.getText().toString();
-                String wakeTimeString = editWakeTime.getText().toString();
-                Float bedTimeFloat = Float.parseFloat(bedTimeString.replace(":", "."));
-                Float wakeTimeFloat = Float.parseFloat(wakeTimeString.replace(":", "."));
-                Float timeSleptFloat = (24f - bedTimeFloat) + wakeTimeFloat;
-                int timeSlept = Math.round(timeSleptFloat);
                 final SleepEntry entry = new SleepEntry(tiredRating, wakeRating, timeSlept, editDate.getText().toString());
                 final JSONObject entryJson = entry.toJson();
                 new Thread(new Runnable() {
@@ -170,12 +259,27 @@ public class NewEntryFragment extends Fragment {
         if(requestCode == BED_TIME_REQUEST && resultCode == Activity.RESULT_OK){
             String bedTime = data.getStringExtra(TimePickerFragment.TIME_EXTRA_KEY);
             editBedTime.setText(bedTime);
+            setTimeSlept();
         }else if(requestCode == WAKE_TIME_REQUEST && resultCode == Activity.RESULT_OK){
             String wakeTime = data.getStringExtra(TimePickerFragment.TIME_EXTRA_KEY);
             editWakeTime.setText(wakeTime);
+            setTimeSlept();
+
         }else if(requestCode == DATE_REQUEST && resultCode == Activity.RESULT_OK){
             String date = data.getStringExtra(DatePickerFragment.DATE_EXTRA_KEY);
             editDate.setText(date);
+        }
+    }
+
+    public void setTimeSlept(){
+        if(!editBedTime.getText().toString().equals("") && !editWakeTime.getText().toString().equals("")){
+            String bedTimeString = editBedTime.getText().toString();
+            String wakeTimeString = editWakeTime.getText().toString();
+            Float bedTimeFloat = Float.parseFloat(bedTimeString.replace(":", "."));
+            Float wakeTimeFloat = Float.parseFloat(wakeTimeString.replace(":", "."));
+            Float timeSleptFloat = (24f - bedTimeFloat) + wakeTimeFloat;
+            timeSlept = Math.round(timeSleptFloat);
+            textTimeSlept.setText("Time Slept: " + String.valueOf(timeSlept) + " hours");
         }
     }
 

@@ -91,6 +91,16 @@ public class SleepEntryDAO {
         return entryId;
     }
 
+    public void updateEntry(JSONObject jsonObject, int id){
+        String urlString = URL_PREFIX + URL_SLEEP + id;
+        NetworkAdapter.httpRequest(urlString, "PUT", jsonObject, headerProperties);
+    }
+
+    public void deleteEntry(int id){
+        String urlString = URL_PREFIX + URL_SLEEP + id;
+        NetworkAdapter.httpRequest(urlString, "DELETE", null, headerProperties);
+    }
+
     public ArrayList<Integer> getAverages(){
         ArrayList<SleepEntry> entries = getAllEntries();
         return getAverages(entries);

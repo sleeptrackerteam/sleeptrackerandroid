@@ -27,6 +27,7 @@ public class NetworkAdapter {
         try{
             URL url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod(requestMethod);
 
             if (headerProperties != null) {
                 for (Map.Entry<String, String> property : headerProperties.entrySet()) {
@@ -37,7 +38,6 @@ public class NetworkAdapter {
 
             if((requestMethod.equals("POST") || requestMethod.equals("PUT")) && requestBody != null){
                 connection.setDoInput(true);
-                connection.setRequestMethod(requestMethod);
                 OutputStream outputStream = connection.getOutputStream();
 
                 outputStream.write(requestBody.toString().getBytes());
@@ -47,7 +47,7 @@ public class NetworkAdapter {
             }
 
             int responseCode = connection.getResponseCode();
-            if(connection.getResponseCode() == HttpURLConnection.HTTP_OK || connection.getResponseCode() == HttpURLConnection.HTTP_CREATED){
+            if(connection.getResponseCode() == HttpURLConnection.HTTP_OK || connection.getResponseCode() == HttpURLConnection.HTTP_CREATED ){
                 stream = connection.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
                 String line = reader.readLine();
