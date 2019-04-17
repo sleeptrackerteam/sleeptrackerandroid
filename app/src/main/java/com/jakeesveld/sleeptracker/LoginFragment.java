@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -151,6 +152,7 @@ public class LoginFragment extends DialogFragment {
 
             if (getFragmentManager() != null) {
                 getFragmentManager().beginTransaction().remove(LoginFragment.this).commit();
+                Toast.makeText(getContext(), "You have successfully logged in", Toast.LENGTH_SHORT).show();
             }
         }
     }

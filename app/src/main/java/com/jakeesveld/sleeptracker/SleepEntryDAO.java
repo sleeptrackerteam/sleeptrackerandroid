@@ -39,10 +39,20 @@ public class SleepEntryDAO {
             HomeActivity.usersDao.setUserId(resultJson.getInt("user_id"));
             HomeActivity.usersDao.setUsername(userInfo.getString("username"));
             HomeActivity.usersDao.setPassword(userInfo.getString("password"));
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
         headerProperties.put("Authorization", SESSION_TOKEN);
+    }
+
+    public void logoutHandler(){
+        HomeActivity.usersDao.setUserId(0);
+        HomeActivity.usersDao.setPassword("");
+        HomeActivity.usersDao.setUsername("");
+        headerProperties = new HashMap<>();
+        headerProperties.put("Content-Type", "application/json");
     }
 
     public void registerHandler(JSONObject userInfo) {
@@ -55,6 +65,10 @@ public class SleepEntryDAO {
             HomeActivity.usersDao.setUserId(userId);
             HomeActivity.usersDao.setUsername(userInfo.getString("username"));
             HomeActivity.usersDao.setPassword(userInfo.getString("password"));
+            JSONObject userLoginInfo = new JSONObject();
+            userLoginInfo.put("username", userInfo.getString("username"));
+            userLoginInfo.put("password", userInfo.getString("password"));
+            loginHandler(userLoginInfo);
         } catch (JSONException e) {
             e.printStackTrace();
         }

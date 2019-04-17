@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Time Slept: 8 hours"
+                android:text="@string/time_slept_placeholder"
                 android:textAlignment="center"
                 android:textStyle="bold"/>
         </LinearLayout>

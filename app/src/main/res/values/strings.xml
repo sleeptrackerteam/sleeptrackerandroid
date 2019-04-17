@@ -13,4 +13,30 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recommended_hours_placheholder">8</string>
+    <string name="recommended_hours_static_text">Reccomended Hours of Sleep</string>
+    <string name="home_title_placeholder">Hello!</string>
+    <string name="settings_title">Settings</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="log_out">Log out</string>
+    <string name="about">About</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="enter_date">Enter Date:</string>
+    <string name="date_placeholder">YYYY-MM-DD</string>
+    <string name="date_button_text">Pick Date</string>
+    <string name="bedtime">Bedtime:</string>
+    <string name="bedtime_placeholder">hh:mm</string>
+    <string name="time_button_text">Pick Time</string>
+    <string name="wake_time">Wake Time:</string>
+    <string name="tired_rating">Tired Rating at bed time</string>
+    <string name="wake_mood">Mood When Waking</string>
+    <string name="submit_button">Submit Sleep Entry</string>
+    <string name="update_button">Update Entry</string>
+    <string name="delete_button">Delete Entry</string>
+    <string name="time_slept_placeholder">Time Slept: 8 hours</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
 </resources>

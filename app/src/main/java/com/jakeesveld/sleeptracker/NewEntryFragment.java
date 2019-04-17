@@ -72,6 +72,8 @@ public class NewEntryFragment extends Fragment {
         }else{
             updatableEntry= null;
         }
+
+
     }
 
     @Override
@@ -94,15 +96,6 @@ public class NewEntryFragment extends Fragment {
         buttonUpdate = view.findViewById(R.id.button_update);
         buttonDelete = view.findViewById(R.id.button_delete);
         textTimeSlept = view.findViewById(R.id.text_view_time_slept);
-
-        tired1.setOnClickListener(listener);
-        tired2.setOnClickListener(listener);
-        tired3.setOnClickListener(listener);
-        tired4.setOnClickListener(listener);
-        wake1.setOnClickListener(listener);
-        wake2.setOnClickListener(listener);
-        wake3.setOnClickListener(listener);
-        wake4.setOnClickListener(listener);
 
         if(updatableEntry != null){
             textTimeSlept.setText("Time Slept: " + updatableEntry.getTimeSlept() + " hours");
@@ -181,6 +174,16 @@ public class NewEntryFragment extends Fragment {
             buttonUpdate.setVisibility(View.GONE);
         }
 
+        tired1.setOnClickListener(listener);
+        tired2.setOnClickListener(listener);
+        tired3.setOnClickListener(listener);
+        tired4.setOnClickListener(listener);
+        wake1.setOnClickListener(listener);
+        wake2.setOnClickListener(listener);
+        wake3.setOnClickListener(listener);
+        wake4.setOnClickListener(listener);
+
+
         buttonBedTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,9 +227,7 @@ public class NewEntryFragment extends Fragment {
                     public void run() {
                         int entryId = HomeActivity.dao.createEntry(entryJson);
                         entry.setId(entryId);
-                        if(getFragmentManager() != null){
-                            getFragmentManager().beginTransaction().remove(NewEntryFragment.this).commit();
-                        }
+                        startActivity(new Intent(getContext(), HomeActivity.class));
                     }
                 }).start();
             }
