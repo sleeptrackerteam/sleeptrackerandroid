@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TimePicker;
 
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
 
@@ -114,6 +116,30 @@ public class NewEntryFragment extends Fragment {
                 if(getFragmentManager() != null){
                     fragment.show(getFragmentManager(), DATE_PICKER_TAG);
                 }
+            }
+        });
+
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String bedTimeString = editBedTime.getText().toString();
+                String wakeTimeString = editWakeTime.getText().toString();
+                Float bedTimeFloat = Float.parseFloat(bedTimeString.replace(":", "."));
+                Float wakeTimeFloat = Float.parseFloat(wakeTimeString.replace(":", "."));
+                Float timeSleptFloat = (24f - bedTimeFloat) + wakeTimeFloat;
+                int timeSlept = Math.round(timeSleptFloat);
+                final SleepEntry entry = new SleepEntry(tiredRating, wakeRating, timeSlept, editDate.getText().toString());
+                final JSONObject entryJson = entry.toJson();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        int entryId = HomeActivity.dao.createEntry(entryJson);
+                        entry.setId(entryId);
+                        if(getFragmentManager() != null){
+                            getFragmentManager().beginTransaction().remove(NewEntryFragment.this).commit();
+                        }
+                    }
+                }).start();
             }
         });
     }

@@ -122,6 +122,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            entryList.clear();
                             entryList.addAll(daoEntryList);
                             listAdapter.notifyDataSetChanged();
                             String greetingText = "Hello, " + usersDao.getUsername();
@@ -140,21 +141,4 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
 
     }
 
-/*    public void refreshList(){
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final ArrayList<SleepEntry> daoEntryList = dao.getAllEntries();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        entryList = daoEntryList;
-                        listAdapter.notifyDataSetChanged();
-                    }
-                });
-
-            }
-        }).start();
-    }*/
 }

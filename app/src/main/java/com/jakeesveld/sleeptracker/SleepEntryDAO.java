@@ -17,6 +17,7 @@ public class SleepEntryDAO {
     private static final String URL_REGISTER = "register";
     private static final String URL_LOGIN = "login";
     private static final String URL_LOGUOUT = "logout";
+    private static final String URL_SLEEP = "sleep/";
     private static String SESSION_TOKEN;
     private static Map<String, String> headerProperties;
 
@@ -75,6 +76,19 @@ public class SleepEntryDAO {
             e.printStackTrace();
         }
         return entries;
+    }
+
+    public int createEntry(JSONObject json){
+        String urlString = URL_PREFIX + URL_SLEEP;
+        int entryId = 0;
+        String result = NetworkAdapter.httpRequest(urlString, "POST", json, headerProperties);
+        try {
+            JSONObject object = new JSONObject(result);
+            entryId = object.getInt("id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return entryId;
     }
 
     public ArrayList<Integer> getAverages(){

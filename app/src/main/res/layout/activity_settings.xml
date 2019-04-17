@@ -31,10 +31,20 @@
     <TextView
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_login"
+        android:id="@+id/text_register"
+        android:clickable="true"
+        android:textSize="32sp"
+        android:text="Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_register"
         android:id="@+id/text_logout"
         android:clickable="true"
         android:textSize="32sp"
-        android:text="Log Out"
+        android:text="Log out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

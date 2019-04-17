@@ -11,10 +11,6 @@ public class SleepEntry implements Serializable {
     private String date;
 
     public SleepEntry(JSONObject json){
-        /*        "timeSlept": 9,
-        "wakeMood": 4,
-        "sleepMood": 3,
-        "date": "2019-04-13"*/
         try {
             this.date = json.getString("date");
             this.wakeMoodRating = json.getInt("wakeMood");
@@ -27,7 +23,21 @@ public class SleepEntry implements Serializable {
 
     }
 
-    public SleepEntry(int id, int tiredRating, int wakeMoodRating, int averageMoodRating, int timeSlept, String date) {
+    public JSONObject toJson(){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("date", this.date);
+            object.put("wakeMood", this.wakeMoodRating);
+            object.put("sleepMood", this.tiredRating);
+            object.put("timeSlept", this.timeSlept);
+            object.put("user_id", HomeActivity.usersDao.getUserId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    public SleepEntry(int id, int tiredRating, int wakeMoodRating, int timeSlept, String date) {
         this.id = id;
         this.tiredRating = tiredRating;
         this.wakeMoodRating = wakeMoodRating;
@@ -35,7 +45,7 @@ public class SleepEntry implements Serializable {
         this.date = date;
     }
 
-    public SleepEntry(int tiredRating, int wakeMoodRating, int averageMoodRating, int timeSlept, String date) {
+    public SleepEntry(int tiredRating, int wakeMoodRating, int timeSlept, String date) {
         this.tiredRating = tiredRating;
         this.wakeMoodRating = wakeMoodRating;
         this.timeSlept = timeSlept;
@@ -83,10 +93,4 @@ public class SleepEntry implements Serializable {
         this.date = date;
     }
 
-/*    public JSONObject toJSON(){
-        JSONObject entryJson = new JSONObject();
-        entryJson.put("id", this.id);
-        entryJson.put()
-    }*/
 }
-/*sleep: {id, user_id, timeSlept, wakeMood, sleepMood, date-format(YYYY-MM-DD)}*/
