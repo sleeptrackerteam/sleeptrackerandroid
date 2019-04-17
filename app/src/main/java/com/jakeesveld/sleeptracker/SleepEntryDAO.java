@@ -79,35 +79,93 @@ public class SleepEntryDAO {
 
     public ArrayList<Integer> getAverages(){
         ArrayList<SleepEntry> entries = getAllEntries();
+        return getAverages(entries);
+    }
+
+    public ArrayList<Integer> getAverages(ArrayList<SleepEntry> entries){
         int avg4 = 0, avg5 = 0, avg6 = 0, avg7 = 0, avg8 = 0, avg9 = 0, avg10 = 0, avg11 = 0, avg12 = 0;
         for(SleepEntry entry: entries){
             switch(entry.getTimeSlept()){
                 case 4:
-                    avg4 += 1;
+                    if(entry.getWakeMoodRating() == 4){
+                        avg4 += 2;
+                    }else if(entry.getWakeMoodRating() == 3){
+                        avg4 += 1;
+                    }else if(entry.getWakeMoodRating() == 1){
+                        avg4 -= 1;
+                    }
                     break;
                 case 5:
-                    avg5 += 1;
+                    if(entry.getWakeMoodRating() == 4){
+                        avg5 += 2;
+                    }else if(entry.getWakeMoodRating() == 3){
+                        avg5 += 1;
+                    }else if(entry.getWakeMoodRating() == 1){
+                        avg5 -= 1;
+                    }
                     break;
                 case 6:
-                    avg6 += 1;
+                    if(entry.getWakeMoodRating() == 4){
+                        avg6 += 2;
+                    }else if(entry.getWakeMoodRating() == 3){
+                        avg6 += 1;
+                    }else if(entry.getWakeMoodRating() == 1){
+                        avg6 -= 1;
+                    }
                     break;
                 case 7:
-                    avg7 += 1;
+                    if(entry.getWakeMoodRating() == 4){
+                        avg7 += 2;
+                    }else if(entry.getWakeMoodRating() == 3){
+                        avg7 += 1;
+                    }else if(entry.getWakeMoodRating() == 1){
+                        avg7 -= 1;
+                    }
                     break;
                 case 8:
-                    avg8 += 1;
+                    if(entry.getWakeMoodRating() == 4){
+                        avg8 += 2;
+                    }else if(entry.getWakeMoodRating() == 3){
+                        avg8 += 1;
+                    }else if(entry.getWakeMoodRating() == 1){
+                        avg8 -= 1;
+                    }
                     break;
                 case 9:
-                    avg9 += 1;
+                    if(entry.getWakeMoodRating() == 4){
+                        avg9 += 2;
+                    }else if(entry.getWakeMoodRating() == 3){
+                        avg9 += 1;
+                    }else if(entry.getWakeMoodRating() == 1){
+                        avg9 -= 1;
+                    }
                     break;
                 case 10:
-                    avg10 += 1;
+                    if(entry.getWakeMoodRating() == 4){
+                        avg10 += 2;
+                    }else if(entry.getWakeMoodRating() == 3){
+                        avg10 += 1;
+                    }else if(entry.getWakeMoodRating() == 1){
+                        avg10 -= 1;
+                    }
                     break;
                 case 11:
-                    avg11 += 1;
+                    if(entry.getWakeMoodRating() == 4){
+                        avg11 += 2;
+                    }else if(entry.getWakeMoodRating() == 3){
+                        avg11 += 1;
+                    }else if(entry.getWakeMoodRating() == 1){
+                        avg11 -= 1;
+                    }
                     break;
                 case 12:
-                    avg12 += 1;
+                    if(entry.getWakeMoodRating() == 4){
+                        avg12 += 2;
+                    }else if(entry.getWakeMoodRating() == 3){
+                        avg12 += 1;
+                    }else if(entry.getWakeMoodRating() == 1){
+                        avg12 -= 1;
+                    }
                     break;
             }
         }

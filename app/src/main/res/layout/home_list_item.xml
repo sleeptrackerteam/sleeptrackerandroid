@@ -15,8 +15,9 @@
         android:id="@+id/image_view_graph"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_width="wrap_content"
+        android:src="@drawable/big_smile"
+        android:adjustViewBounds="true"
+        android:layout_width="100dp"
         android:layout_height="wrap_content" />
 
         <TextView

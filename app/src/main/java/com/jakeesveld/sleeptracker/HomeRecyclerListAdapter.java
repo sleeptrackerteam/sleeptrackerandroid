@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+
 public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerListAdapter.ViewHolder> {
     ArrayList<SleepEntry> dataList;
 
@@ -34,6 +35,19 @@ public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerLi
         viewHolder.textMoodRating.setText("Mood Rating: " +(String.valueOf(data.getWakeMoodRating())));
         viewHolder.textEntryDate.setText(data.getDate());
         viewHolder.textTimeSlept.setText("Time Slept: " + data.getTimeSlept() + " hours");
+        switch (data.getWakeMoodRating()){
+            case 1:
+                viewHolder.imageViewGraph.setImageDrawable(viewHolder.parent.getContext().getDrawable(R.drawable.frown));
+                break;
+            case 2:
+                viewHolder.imageViewGraph.setImageDrawable(viewHolder.parent.getContext().getDrawable(R.drawable.meh));
+                break;
+            case 3:
+                viewHolder.imageViewGraph.setImageDrawable(viewHolder.parent.getContext().getDrawable(R.drawable.smile));
+                break;
+            case 4:
+                viewHolder.imageViewGraph.setImageDrawable(viewHolder.parent.getContext().getDrawable(R.drawable.big_smile));
+        }
 
         viewHolder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
