@@ -3,9 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
+    android:background="@color/colorPrimary"
+    android:padding="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
+    <TextView
+        android:id="@+id/text_login_warning"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:gravity="center"
+        android:text="Please Login to track your sleeping habits!"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/text_view_greeting"
@@ -44,6 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
+        app:itemBackground="@color/colorPrimaryDark"
+        app:itemTextColor="@color/colorAccent"
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -63,12 +63,25 @@ public class SleepGraph extends android.support.v7.widget.AppCompatImageView {
         paint1 = new Paint();
         paint2 = new Paint();
         paint3 = new Paint();
-        paint1.setColor(getResources().getColor(R.color.colorPrimaryDark));
-        paint2.setColor(getResources().getColor(R.color.colorPrimary));
+        paint1.setColor(getResources().getColor(android.R.color.darker_gray));
+        paint2.setColor(getResources().getColor(android.R.color.black));
         paint3.setColor(getResources().getColor(android.R.color.white));
         paint3.setTextSize(32);
 
 
+    }
+
+    public void resetGraph(){
+        yEnd4 = 1;
+        yEnd5 = 1;
+        yEnd6 = 1;
+        yEnd7 = 1;
+        yEnd8 = 1;
+        yEnd9 = 1;
+        yEnd10 = 1;
+        yEnd11 = 1;
+        yEnd12 = 1;
+        invalidate();
     }
 
     private float getHighest(){

@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:backgroundTint="@color/colorPrimary"
     android:layout_height="match_parent"
     android:clickable="true"
     android:background="@android:color/white"
@@ -11,13 +12,15 @@
     <LinearLayout
         android:id="@+id/layout_date"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <TextView
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/text_date"
-        android:textSize="32sp"
+        android:textSize="28sp"
+        android:textStyle="bold"
         android:text="@string/enter_date"
         android:layout_width="0dp"
         android:layout_weight="1"
@@ -26,6 +29,7 @@
         android:id="@+id/edit_date"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
+        android:textStyle="bold"
         android:hint="@string/date_placeholder"
         app:layout_constraintStart_toEndOf="@id/text_date"
         android:layout_width="0dp"
@@ -33,6 +37,7 @@
         android:layout_height="wrap_content" />
     <Button
         android:text="@string/date_button_text"
+        android:background="@color/colorAccent"
         android:id="@+id/button_pick_date"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/edit_date"
@@ -42,6 +47,7 @@
 
     <LinearLayout
         android:id="@+id/layout_bed_time"
+        android:layout_margin="5dp"
         app:layout_constraintTop_toBottomOf="@id/layout_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -49,6 +55,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/text_bed_time"
+        android:textStyle="bold"
         android:textSize="32sp"
         android:text="@string/bedtime"
         android:layout_width="0dp"
@@ -58,6 +65,7 @@
         android:id="@+id/edit_bed_time"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
+        android:textStyle="bold"
         android:hint="@string/bedtime_placeholder"
         app:layout_constraintStart_toEndOf="@id/text_date"
         android:layout_width="0dp"
@@ -66,6 +74,7 @@
     <Button
         android:id="@+id/button_bed_time"
         android:text="@string/time_button_text"
+        android:background="@color/colorAccent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/edit_date"
         android:layout_width="wrap_content"
@@ -74,6 +83,7 @@
 
     <LinearLayout
         android:id="@+id/layout_wake_time"
+        android:layout_margin="5dp"
         app:layout_constraintTop_toBottomOf="@id/layout_bed_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -81,6 +91,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/text_wake_time"
+        android:textStyle="bold"
         android:textSize="28sp"
         android:text="@string/wake_time"
         android:layout_width="0dp"
@@ -90,6 +101,7 @@
         android:id="@+id/edit_wake_time"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
+        android:textStyle="bold"
         android:hint="@string/bedtime_placeholder"
         app:layout_constraintStart_toEndOf="@id/text_date"
         android:layout_width="0dp"
@@ -98,6 +110,7 @@
     <Button
         android:id="@+id/button_wake_time"
         android:text="@string/time_button_text"
+        android:background="@color/colorAccent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/edit_date"
         android:layout_width="wrap_content"
@@ -208,6 +221,7 @@
         android:layout_margin="10dp"
         android:text="@string/submit_button"
         android:id="@+id/button_submit"
+        android:background="@color/colorAccent"
         app:layout_constraintTop_toBottomOf="@id/layout_wake_mood_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -218,6 +232,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:id="@+id/button_update"
+        android:background="@color/colorAccent"
         app:layout_constraintTop_toBottomOf="@id/button_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -227,6 +242,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:id="@+id/button_delete"
+        android:background="@color/colorAccent"
         app:layout_constraintTop_toBottomOf="@id/button_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

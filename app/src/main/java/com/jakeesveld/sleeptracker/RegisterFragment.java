@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,13 +28,13 @@ import org.json.JSONObject;
  * Use the {@link RegisterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends DialogFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    EditText editUsername, editPassword;
+    EditText editUsername, editPassword, editFirstName, editLastName;
     Button buttonSubmit;
 
     private OnFragmentInteractionListener mListener;
@@ -72,7 +74,7 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
 
@@ -81,17 +83,22 @@ public class RegisterFragment extends Fragment {
         editPassword = view.findViewById(R.id.edit_password);
         editUsername = view.findViewById(R.id.edit_username);
         buttonSubmit = view.findViewById(R.id.button_login);
+        editFirstName = view.findViewById(R.id.edit_first_name);
+        editLastName = view.findViewById(R.id.edit_last_name);
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = editUsername.getText().toString();
                 String password = editPassword.getText().toString();
+                String firstName = editFirstName.getText().toString();
+                String lastName = editLastName.getText().toString();
 
                 JSONObject userInfo = new JSONObject();
                 try {
                     userInfo.put("username", username);
                     userInfo.put("password", password);
+                    userInfo.put("fullName", firstName + "" + lastName);
 
                     AsyncHandleLogin handleLogin = new AsyncHandleLogin();
                     handleLogin.execute(userInfo);
@@ -147,7 +154,10 @@ public class RegisterFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             Log.i("request", "success");
-            getActivity().onBackPressed();
+            if (getFragmentManager() != null) {
+                getFragmentManager().beginTransaction().remove(RegisterFragment.this).commit();
+                Toast.makeText(getContext(), "You have successfully registered", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

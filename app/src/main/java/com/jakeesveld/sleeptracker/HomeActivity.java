@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     public static UsersDAO usersDao;
     ArrayList<SleepEntry> entryList;
     HomeRecyclerListAdapter listAdapter;
-    TextView textViewGreeting;
+    TextView textViewGreeting, textViewWarning;
     SleepGraph homeGraphView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -58,6 +58,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         setContentView(R.layout.activity_home);
         context = this;
         textViewGreeting = findViewById(R.id.text_view_greeting);
+        textViewWarning = findViewById(R.id.text_login_warning);
         dao = new SleepEntryDAO();
         usersDao = new UsersDAO(context);
         entryList = new ArrayList<>();
@@ -103,7 +104,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     @Override
     protected void onResume() {
         super.onResume();
-        int userId = usersDao.getUserId();
+        usersDao = new UsersDAO(context);
         if (usersDao.getUserId() != 0) {
             new Thread(new Runnable() {
                 @Override
@@ -128,11 +129,15 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                             String greetingText = "Hello, " + usersDao.getUsername();
                             textViewGreeting.setText(greetingText);
                             homeGraphView.setYEndings(averagesList);
+                            textViewWarning.setVisibility(View.GONE);
                         }
                     });
 
                 }
             }).start();
+        }else{
+            entryList.clear();
+            homeGraphView.resetGraph();
         }
     }
 

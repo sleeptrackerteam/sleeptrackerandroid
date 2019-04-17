@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SettingsActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener{
+public class SettingsActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener{
 
     TextView login, logout, about, register;
     Context context;
@@ -30,8 +30,6 @@ public class SettingsActivity extends AppCompatActivity implements LoginFragment
             public void onClick(View v) {
                 LoginFragment fragment = new LoginFragment();
                 fragment.show(fragmentManager, "Login");
-                /*FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.layout_parent, new LoginFragment()).addToBackStack(null).commit();*/
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +37,14 @@ public class SettingsActivity extends AppCompatActivity implements LoginFragment
             public void onClick(View v) {
                 HomeActivity.dao.logoutHandler();
                 Toast.makeText(context, "You have successfully logged out", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegisterFragment Registerfragment = new RegisterFragment();
+                Registerfragment.show(fragmentManager, "Register");
             }
         });
     }
