@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class SleepGraph extends android.support.v7.widget.AppCompatImageView {
     Paint paint1, paint2, paint3;
     float yEnd4, yEnd5, yEnd6, yEnd7, yEnd8, yEnd9, yEnd10, yEnd11, yEnd12, yOffset;
+    int recommendedHours;
     public SleepGraph(Context context) {
         super(context);
         init(null);
@@ -41,6 +42,9 @@ public class SleepGraph extends android.support.v7.widget.AppCompatImageView {
         yEnd12 = endingList.get(8);
         yOffset = getHighest();
         invalidate();
+    }
+    public float getRecommendedHours(){
+        return recommendedHours;
     }
 
 
@@ -71,32 +75,41 @@ public class SleepGraph extends android.support.v7.widget.AppCompatImageView {
 
     private float getHighest(){
         float highestNumber = 0;
-        if(yEnd4 > highestNumber){
+        if(yEnd4 >= highestNumber){
             highestNumber = yEnd4;
+            recommendedHours = 4;
         }
-        if(yEnd5 > highestNumber){
+        if(yEnd5 >= highestNumber){
             highestNumber = yEnd5;
+            recommendedHours = 5;
         }
-        if(yEnd6 > highestNumber){
+        if(yEnd6 >= highestNumber){
             highestNumber = yEnd6;
+            recommendedHours = 6;
         }
-        if(yEnd7 > highestNumber){
+        if(yEnd7 >= highestNumber){
             highestNumber = yEnd7;
+            recommendedHours = 7;
         }
-        if(yEnd8 > highestNumber){
+        if(yEnd8 >= highestNumber){
             highestNumber = yEnd8;
+            recommendedHours = 8;
         }
-        if(yEnd9 > highestNumber){
+        if(yEnd9 >= highestNumber){
             highestNumber = yEnd9;
+            recommendedHours = 9;
         }
-        if(yEnd10 > highestNumber){
+        if(yEnd10 >= highestNumber){
             highestNumber = yEnd10;
+            recommendedHours = 10;
         }
-        if(yEnd11 > highestNumber){
+        if(yEnd11 >= highestNumber){
             highestNumber = yEnd11;
+            recommendedHours = 11;
         }
-        if(yEnd12 > highestNumber){
+        if(yEnd12 >= highestNumber){
             highestNumber = yEnd12;
+            recommendedHours = 12;
         }
         return highestNumber;
     }

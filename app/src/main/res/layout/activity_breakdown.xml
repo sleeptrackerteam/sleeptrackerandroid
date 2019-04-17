@@ -16,12 +16,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <com.jakeesveld.sleeptracker.SleepGraph
+                android:id="@+id/sleep_graph_breakdown"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:src="@drawable/big_smile" />
+                android:layout_height="275dp"
+                android:adjustViewBounds="true" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
