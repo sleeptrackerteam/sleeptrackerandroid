@@ -1,6 +1,7 @@
 package com.jakeesveld.sleeptracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -45,6 +46,13 @@ public class SettingsActivity extends AppCompatActivity implements LoginFragment
             public void onClick(View v) {
                 RegisterFragment Registerfragment = new RegisterFragment();
                 Registerfragment.show(fragmentManager, "Register");
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, AboutActivity.class));
             }
         });
     }
