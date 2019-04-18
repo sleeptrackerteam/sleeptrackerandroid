@@ -1,5 +1,8 @@
 package com.jakeesveld.sleeptracker;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +17,8 @@ public class SleepEntryDAO {
     private static final String URL_REGISTER = "register";
     private static final String URL_LOGIN = "login";
     private static final String URL_SLEEP = "sleep/";
+    public static final String SUCCESS = "success";
+    public static final String FAILED = "failed";
     private static String SESSION_TOKEN;
     private static Map<String, String> headerProperties;
 
@@ -22,7 +27,7 @@ public class SleepEntryDAO {
         headerProperties.put("Content-Type", "application/json");
     }
 
-    public void loginHandler(JSONObject userInfo) {
+    public String loginHandler(JSONObject userInfo) {
         String urlString = URL_PREFIX + URL_AUTH_PREFIX + URL_LOGIN;
         String result = NetworkAdapter.httpRequest(urlString, "POST", userInfo, headerProperties);
         try {
@@ -36,8 +41,10 @@ public class SleepEntryDAO {
 
         } catch (JSONException e) {
             e.printStackTrace();
+            return FAILED;
         }
         headerProperties.put("Authorization", SESSION_TOKEN);
+        return SUCCESS;
     }
 
     public void logoutHandler(){

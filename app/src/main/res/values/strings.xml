@@ -57,5 +57,6 @@
     <string name="about_giacomo_body">I\'m Giacomo, passionately curious about the word around me, I\'m learning the secret art of coding at Lambda School. I\'ve also been just accepted to have an internship there as a Project Manager. I love football (soccer), boxing and martial arts in general</string>
     <string name="our_website">Our Website</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="entry_warning">No entries detected. Please create a new entry to get started!</string>
 
 </resources>

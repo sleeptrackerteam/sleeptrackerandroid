@@ -76,7 +76,7 @@ public class LoginFragment extends DialogFragment {
         // Inflate the layout for this fragment
         try {
             getDialog().getWindow().setWindowAnimations(R.style.WindowAnimationStyle);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         return inflater.inflate(R.layout.fragment_login, container, false);
@@ -141,24 +141,33 @@ public class LoginFragment extends DialogFragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    class AsyncHandleLogin extends AsyncTask<JSONObject, Integer, String>{
+    class AsyncHandleLogin extends AsyncTask<JSONObject, Integer, String> {
 
         @Override
         protected String doInBackground(JSONObject... jsonObjects) {
             JSONObject userInfo = jsonObjects[0];
-            HomeActivity.dao.loginHandler(userInfo);
-            String result = "";
-            return result;
+            String result = HomeActivity.dao.loginHandler(userInfo);
+            if (result.equals(SleepEntryDAO.SUCCESS)) {
+                return SleepEntryDAO.SUCCESS;
+            } else {
+                return SleepEntryDAO.FAILED;
+            }
+
         }
 
         @Override
         protected void onPostExecute(String s) {
             Log.i("request", "success");
 
-            if (getFragmentManager() != null) {
+            if (getFragmentManager() != null && s.equals(SleepEntryDAO.SUCCESS)) {
                 getFragmentManager().beginTransaction().remove(LoginFragment.this).commit();
                 Toast.makeText(getContext(), "You have successfully logged in", Toast.LENGTH_SHORT).show();
+            } else if (getFragmentManager() != null) {
+                getFragmentManager().beginTransaction().remove(LoginFragment.this).commit();
+                Toast.makeText(getContext(), "Failed to log in. Please check credentials and try again", Toast.LENGTH_LONG).show();
             }
+
         }
     }
 }
+

@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     public static UsersDAO usersDao;
     ArrayList<SleepEntry> entryList;
     HomeRecyclerListAdapter listAdapter;
-    TextView textViewGreeting, textViewWarning;
+    TextView textViewGreeting, textViewWarning, textEntryWarning;
     SleepGraph homeGraphView;
     ProgressBar loadingCircle;
 
@@ -61,6 +61,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         textViewGreeting = findViewById(R.id.text_view_greeting);
         textViewWarning = findViewById(R.id.text_login_warning);
         loadingCircle = findViewById(R.id.loading_circle);
+        textEntryWarning = findViewById(R.id.text_entry_warning);
         dao = new SleepEntryDAO();
         usersDao = new UsersDAO(context);
         entryList = new ArrayList<>();
@@ -136,6 +137,9 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                             textViewGreeting.setText(greetingText);
                             homeGraphView.setYEndings(averagesList);
                             loadingCircle.setVisibility(View.GONE);
+                            if(entryList.size() == 0){
+                                textEntryWarning.setVisibility(View.VISIBLE);
+                            }
                         }
                     });
 
