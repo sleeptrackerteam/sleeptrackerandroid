@@ -51,6 +51,8 @@
             app:layout_constraintTop_toBottomOf="@id/text_about_tl" />
 
         <TextView
+            android:textSize="18sp"
+            android:text="@string/about_benson_body"
             android:id="@+id/text_about_member1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,6 +85,8 @@
             app:layout_constraintTop_toBottomOf="@id/text_about_member2" />
 
         <TextView
+            android:textSize="18sp"
+            android:text="@string/about_jacob_body"
             android:id="@+id/text_about_member3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,6 +102,8 @@
             app:layout_constraintTop_toBottomOf="@id/text_about_member3" />
 
         <TextView
+            android:textSize="18sp"
+            android:text="@string/about_giacomo_body"
             android:id="@+id/text_about_member4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

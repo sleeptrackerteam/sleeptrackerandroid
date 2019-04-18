@@ -52,5 +52,9 @@
     <string name="about_giacomo">Backend Architect - Giacomo Benati</string>
     <string name="about_jake">Android Developer - Jake Esveld</string>
     <string name="about_jake_body">Jake is an aspiring Android developer, currently attending Lambda Schools in his fifth week. With a diverse coding background, but all of it being self-taught, he is excited to finally have some structure in his education. He hopes to one day change the world by means of the use of AI in the renewable energy industry.</string>
+    <string name="about_benson_body">In addition to being a San Francisco native and developer, Benson has also worked in the biological field as a researcher and in dental healthcare.</string>
+    <string name="about_jacob_body">Jacob likes to let his work speak for itself. When Jacob isn\'t coding away, he likes to spend his time rock climbing and golfing.</string>
+    <string name="about_giacomo_body">I\'m Giacomo, passionately curious about the word around me, I\'m learning the secret art of coding at Lambda School. I\'ve also been just accepted to have an internship there as a Project Manager. I love football (soccer), boxing and martial arts in general</string>
+    <string name="our_website">Our Website</string>
 
 </resources>

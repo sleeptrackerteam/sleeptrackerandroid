@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener{
 
-    TextView login, logout, about, register;
+    TextView login, logout, about, register, website;
     Context context;
 
     @Override
@@ -25,6 +25,7 @@ public class SettingsActivity extends AppCompatActivity implements LoginFragment
         logout = findViewById(R.id.text_logout);
         about = findViewById(R.id.text_about);
         register = findViewById(R.id.text_register);
+        website = findViewById(R.id.text_website);
         context = this;
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,15 @@ public class SettingsActivity extends AppCompatActivity implements LoginFragment
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(context, AboutActivity.class));
+            }
+        });
+        website.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://sleeptrackerteam.github.io/sleeptrackerui/index.html";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
             }
         });
     }

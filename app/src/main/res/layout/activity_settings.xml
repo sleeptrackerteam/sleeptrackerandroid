@@ -67,4 +67,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_about"
+        android:id="@+id/text_website"
+        android:textSize="32sp"
+        android:clickable="true"
+        android:layout_margin="15dp"
+        android:textAppearance="@style/Widget.MaterialComponents.Button.TextButton"
+        android:text="@string/our_website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </android.support.constraint.ConstraintLayout>
