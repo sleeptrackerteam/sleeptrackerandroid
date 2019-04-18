@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements NewEntryFragment.OnFragmentInteractionListener, LoginFragment.OnFragmentInteractionListener {
 
-    public static final String FRAGMENT_KEY = "New Entry";
     Context context;
     private TextView mTextMessage;
     public static SleepEntryDAO dao;

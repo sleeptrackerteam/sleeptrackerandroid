@@ -119,6 +119,7 @@
             app:layout_constraintTop_toBottomOf="@id/text_about_member4" />
 
         <TextView
+            android:layout_marginBottom="20dp"
             android:id="@+id/text_about_member5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
