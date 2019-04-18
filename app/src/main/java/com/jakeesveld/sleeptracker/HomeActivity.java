@@ -139,6 +139,8 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                             loadingCircle.setVisibility(View.GONE);
                             if(entryList.size() == 0){
                                 textEntryWarning.setVisibility(View.VISIBLE);
+                            }else {
+                                textEntryWarning.setVisibility(View.GONE);
                             }
                         }
                     });
@@ -146,6 +148,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                 }
             }).start();
         }else{
+            textEntryWarning.setVisibility(View.GONE);
             textViewWarning.setVisibility(View.VISIBLE);
             textViewGreeting.setText("Hello!");
             entryList.clear();
