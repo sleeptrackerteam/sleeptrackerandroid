@@ -110,6 +110,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         usersDao = new UsersDAO(context);
         if (usersDao.getUserId() != 0) {
             loadingCircle.setVisibility(View.VISIBLE);
+            textViewWarning.setVisibility(View.GONE);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -133,7 +134,6 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                             String greetingText = "Hello, " + usersDao.getUsername();
                             textViewGreeting.setText(greetingText);
                             homeGraphView.setYEndings(averagesList);
-                            textViewWarning.setVisibility(View.GONE);
                             loadingCircle.setVisibility(View.GONE);
                         }
                     });
@@ -141,6 +141,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                 }
             }).start();
         }else{
+            textViewWarning.setVisibility(View.VISIBLE);
             textViewGreeting.setText("Hello!");
             entryList.clear();
             listAdapter.notifyDataSetChanged();
