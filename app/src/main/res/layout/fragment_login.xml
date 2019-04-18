@@ -22,6 +22,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
+        android:inputType="textPassword"
         android:id="@+id/edit_password"
         app:layout_constraintTop_toBottomOf="@id/edit_username"
         app:layout_constraintEnd_toEndOf="parent"
