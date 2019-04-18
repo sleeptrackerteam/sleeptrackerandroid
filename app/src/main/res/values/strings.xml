@@ -42,5 +42,15 @@
     <string name="sleep_breakdown_part_1">Sleep is very important in regards to your overall health! The Sleep Tracker team would like to help people just like you to better manage your sleeping habits, and live the healthiest life you can. This breakdown will show you what we think will be the best amount of sleep for your body based on the information you have given us. The Mayo Clinic has written this summary of their recommendation for average sleep time by age. To learn more about what the Mayo Clinic does, and see more interesting statistics like this, go to their website at:https://www.mayoclinic.org/ </string>
     <string name="sleep_breakdown_part_2">Newborns: 14 to 17 hours a day \n12 months: About 10 hours at night, plus 4 hours of naps \n2 years: About 11 to 12 hours at night, plus a 1- to 2-hour afternoon nap \n3 to 5 years: 10 to 13 hours \n6 to 13 years: 9 to 11 hours \n14 to 17 years: 8 to 10 hours \nAdults: 7 to 9 hours</string>
     <string name="login_warning">Please Login to track your sleeping habits!</string>
+    <string name="about_title">Team Members</string>
+    <string name="about_peter">Team Lead - Peter Pham</string>
+    <string name="about_peter_body">A humble developer who\'s always learning and improving. Seeking to solve challenging problems, collaborate with others, and build meaningful projects.</string>
+    <string name="about_benson">Front End Architect - Benson Lei</string>
+    <string name="about_tyler">User Interface Developer - Tyler Biswell</string>
+    <string name="about_tyler_body">Tyler is a newfound developer and student at Lambda School. Tyler was tasked with designing and building the marketing site for Sleep Tracker during his fifth week as a developer. Tyler enjoys solving problems and interacting with others. Father of three, child of technology.</string>
+    <string name="about_jacob">Backend Architect - Jacob McFaul</string>
+    <string name="about_giacomo">Backend Architect - Giacomo Benati</string>
+    <string name="about_jake">Android Developer - Jake Esveld</string>
+    <string name="about_jake_body">Jake is an aspiring Android developer, currently attending Lambda Schools in his fifth week. With a diverse coding background, but all of it being self-taught, he is excited to finally have some structure in his education. He hopes to one day change the world by means of the use of AI in the renewable energy industry.</string>
 
 </resources>

@@ -1,9 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".AboutActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:background="@color/colorAccent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_title"
+            android:textAlignment="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_title_tl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_peter"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/text_title" />
+
+        <TextView
+            android:id="@+id/text_about_tl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_peter_body"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/text_title_tl" />
+
+        <TextView
+            android:id="@+id/text_title_member1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_benson"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/text_about_tl" />
+
+        <TextView
+            android:id="@+id/text_about_member1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_title_member1" />
+
+        <TextView
+            android:id="@+id/text_title_member2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_tyler"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/text_about_member1" />
+
+        <TextView
+            android:id="@+id/text_about_member2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_tyler_body"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/text_title_member2" />
+
+        <TextView
+            android:id="@+id/text_title_member3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_jacob"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/text_about_member2" />
+
+        <TextView
+            android:id="@+id/text_about_member3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_title_member3" />
+
+        <TextView
+            android:id="@+id/text_title_member4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_giacomo"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/text_about_member3" />
+
+        <TextView
+            android:id="@+id/text_about_member4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_title_member4" />
+
+        <TextView
+            android:id="@+id/text_title_member5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_jake"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/text_about_member4" />
+
+        <TextView
+            android:id="@+id/text_about_member5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_jake_body"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/text_title_member5" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>
