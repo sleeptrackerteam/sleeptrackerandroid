@@ -33,9 +33,7 @@ public class SleepEntryDAO {
             JSONObject resultJson = new JSONObject(result);
             SESSION_TOKEN = resultJson.getString("token");
             String topIdString = resultJson.getString("message");
-            /*String[] idStringArray = topIdString.split(",");
-            String idString = idStringArray[1];
-            HomeActivity.usersDao.setUserId(Integer.parseInt(idString));*/
+
             HomeActivity.usersDao.setUserId(resultJson.getInt("user_id"));
             HomeActivity.usersDao.setUsername(userInfo.getString("username"));
             HomeActivity.usersDao.setPassword(userInfo.getString("password"));
@@ -220,25 +218,6 @@ public class SleepEntryDAO {
         return averageList;
     }
 
-/*
-    public int getUserId(String username) {
-        int id = 0;
-        String urlString = URL_PREFIX + URL_GET_USERS;
-        String result = NetworkAdapter.httpRequest(urlString, "GET", null, headerProperties);
-        try {
-            JSONArray resultJson = new JSONArray(result);
-            for (int i = 0; i < resultJson.length(); ++i) {
-                JSONObject object = resultJson.getJSONObject(i);
-                String usernameJson = object.getString("username");
-                if(usernameJson.equals(username)){
-                    id = object.getInt("id");
-                }
-            }
-        } catch (JSONException e1) {
-            e1.printStackTrace();
-        }
-        return id;
-    }*/
 
 }
 

@@ -10,7 +10,7 @@ public class SleepEntry implements Serializable {
     private int id, tiredRating, wakeMoodRating, timeSlept;
     private String date;
 
-    public SleepEntry(JSONObject json){
+    public SleepEntry(JSONObject json) {
         try {
             this.date = json.getString("date");
             this.wakeMoodRating = json.getInt("wakeMood");
@@ -23,7 +23,7 @@ public class SleepEntry implements Serializable {
 
     }
 
-    public JSONObject toJson(){
+    public JSONObject toJson() {
         JSONObject object = new JSONObject();
         try {
             object.put("date", this.date);
@@ -50,6 +50,24 @@ public class SleepEntry implements Serializable {
         this.wakeMoodRating = wakeMoodRating;
         this.timeSlept = timeSlept;
         this.date = date;
+    }
+
+    public String getMonth() {
+        String[] date = this.date.split("-");
+        Integer month = Integer.valueOf(date[1]);
+
+        return month.toString();
+
+    }
+
+    public String getDay() {
+        String[] date = this.date.split("-");
+        return date[2];
+    }
+
+    public String getYear() {
+        String[] date = this.date.split("-");
+        return date[0];
     }
 
     public int getId() {

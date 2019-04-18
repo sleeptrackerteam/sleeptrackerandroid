@@ -66,7 +66,8 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         usersDao = new UsersDAO(context);
         entryList = new ArrayList<>();
         homeGraphView = findViewById(R.id.image_graph);
-        listAdapter = new HomeRecyclerListAdapter(entryList);
+        listAdapter = new HomeRecyclerListAdapter();
+        listAdapter.addAll(entryList);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -130,7 +131,8 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                         public void run() {
                             entryList.clear();
                             entryList.addAll(daoEntryList);
-                            listAdapter.notifyDataSetChanged();
+                            listAdapter.clear();
+                            listAdapter.addAll(entryList);
                             String greetingText = "Hello, " + usersDao.getUsername();
                             textViewGreeting.setText(greetingText);
                             homeGraphView.setYEndings(averagesList);
@@ -144,7 +146,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
             textViewWarning.setVisibility(View.VISIBLE);
             textViewGreeting.setText("Hello!");
             entryList.clear();
-            listAdapter.notifyDataSetChanged();
+            listAdapter.clear();
             homeGraphView.resetGraph();
             loadingCircle.setVisibility(View.GONE);
         }

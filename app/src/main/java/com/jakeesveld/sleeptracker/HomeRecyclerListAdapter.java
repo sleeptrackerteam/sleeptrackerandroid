@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,68 @@ import java.util.ArrayList;
 
 
 public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerListAdapter.ViewHolder> {
-    ArrayList<SleepEntry> dataList;
+    private SortedList<SleepEntry> dataList;
 
-    public HomeRecyclerListAdapter(ArrayList<SleepEntry> dataList) {
-        this.dataList = dataList;
+    public HomeRecyclerListAdapter() {
+        dataList = new SortedList<>(SleepEntry.class, new SortedList.Callback<SleepEntry>() {
+            @Override
+            public int compare(SleepEntry o1, SleepEntry o2) {
+                int result = o2.getYear().compareTo(o1.getYear());
+                if (result == 0){
+                    result = o2.getMonth().compareTo(o1.getMonth());
+                }
+                if(result == 0){
+                    result = o2.getDay().compareTo(o1.getDay());
+                }
+                return result;
+            }
+
+            @Override
+            public void onChanged(int position, int count) {
+                notifyItemRangeChanged(position, count);
+            }
+
+            @Override
+            public boolean areContentsTheSame(SleepEntry oldItem, SleepEntry newItem) {
+                return oldItem.getDate().equals(newItem.getDate());
+            }
+
+            @Override
+            public boolean areItemsTheSame(SleepEntry item1, SleepEntry item2) {
+                return item1.getDate().equals(item2.getDate());
+            }
+
+            @Override
+            public void onInserted(int position, int count) {
+                notifyItemRangeInserted(position, count);
+            }
+
+            @Override
+            public void onRemoved(int position, int count) {
+                notifyItemRangeRemoved(position, count);
+            }
+
+            @Override
+            public void onMoved(int fromPosition, int toPosition) {
+                notifyItemMoved(fromPosition, toPosition);
+            }
+        });
+    }
+
+    public void addAll(ArrayList<SleepEntry> entries) {
+        dataList.beginBatchedUpdates();
+        for (int i = 0; i < entries.size(); i++) {
+            dataList.add(entries.get(i));
+        }
+        dataList.endBatchedUpdates();
+    }
+
+    public void clear() {
+        dataList.beginBatchedUpdates();
+        while (dataList.size() > 0) {
+            dataList.removeItemAt(dataList.size() - 1);
+        }
+        dataList.endBatchedUpdates();
     }
 
     @NonNull
@@ -40,7 +99,7 @@ public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerLi
         viewHolder.textMoodRating.setText("Mood Rating: " +(String.valueOf(data.getWakeMoodRating())));
         viewHolder.textEntryDate.setText(data.getDate());
         viewHolder.textTimeSlept.setText("Time Slept: " + data.getTimeSlept() + " hours");
-        setEnterAnimation(viewHolder.parent, viewHolder);
+        setEnterAnimation(viewHolder.parent);
         switch (data.getWakeMoodRating()){
             case 1:
                 viewHolder.imageViewGraph.setImageDrawable(viewHolder.parent.getContext().getDrawable(R.drawable.frown));
@@ -67,16 +126,12 @@ public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerLi
                         .replace(R.id.container, fragment)
                         .addToBackStack(null)
                         .commit();
-
-                /*Intent intent = new Intent(viewHolder.parent.getContext(), BreakdownActivity.class);
-                intent.putExtra(SleepEntry.SLEEP_ENTRY_KEY, data);
-                ((Activity)viewHolder.parent.getContext()).startActivity(intent);*/
             }
         });
 
     }
 
-    private void setEnterAnimation(View view, ViewHolder holder){
+    private void setEnterAnimation(View view){
         Animation animation = AnimationUtils.loadAnimation(view.getContext(), android.R.anim.slide_in_left);
         view.startAnimation(animation);
     }
