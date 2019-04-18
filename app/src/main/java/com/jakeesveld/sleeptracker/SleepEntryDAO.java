@@ -13,7 +13,6 @@ public class SleepEntryDAO {
     private static final String URL_GET_USERS = "user/";
     private static final String URL_REGISTER = "register";
     private static final String URL_LOGIN = "login";
-    private static final String URL_LOGUOUT = "logout";
     private static final String URL_SLEEP = "sleep/";
     private static String SESSION_TOKEN;
     private static Map<String, String> headerProperties;
@@ -29,7 +28,6 @@ public class SleepEntryDAO {
         try {
             JSONObject resultJson = new JSONObject(result);
             SESSION_TOKEN = resultJson.getString("token");
-            String topIdString = resultJson.getString("message");
 
             HomeActivity.usersDao.setUserId(resultJson.getInt("user_id"));
             HomeActivity.usersDao.setUsername(userInfo.getString("username"));
