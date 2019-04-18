@@ -42,7 +42,7 @@ public class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         String result = Integer.toString(year)
-                + "-" + Integer.toString(month)
+                + "-" + Integer.toString(month + 1)
                 + "-" + Integer.toString(day);
 
         getTargetFragment().onActivityResult(
