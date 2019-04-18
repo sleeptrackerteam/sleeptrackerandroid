@@ -34,7 +34,7 @@ public class RegisterFragment extends DialogFragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    EditText editUsername, editPassword, editFirstName, editLastName;
+    EditText editUsername, editPassword, editFirstName, editLastName, editPasswordConfirm;
     Button buttonSubmit;
 
     private OnFragmentInteractionListener mListener;
@@ -90,25 +90,30 @@ public class RegisterFragment extends DialogFragment {
         buttonSubmit = view.findViewById(R.id.button_login);
         editFirstName = view.findViewById(R.id.edit_first_name);
         editLastName = view.findViewById(R.id.edit_last_name);
+        editPasswordConfirm = view.findViewById(R.id.edit_password_confirm);
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = editUsername.getText().toString();
-                String password = editPassword.getText().toString();
-                String firstName = editFirstName.getText().toString();
-                String lastName = editLastName.getText().toString();
+                if(editPassword.getText().toString().equals(editPasswordConfirm.getText().toString())) {
+                    String username = editUsername.getText().toString();
+                    String password = editPassword.getText().toString();
+                    String firstName = editFirstName.getText().toString();
+                    String lastName = editLastName.getText().toString();
 
-                JSONObject userInfo = new JSONObject();
-                try {
-                    userInfo.put("username", username);
-                    userInfo.put("password", password);
-                    userInfo.put("fullName", firstName + "" + lastName);
+                    JSONObject userInfo = new JSONObject();
+                    try {
+                        userInfo.put("username", username);
+                        userInfo.put("password", password);
+                        userInfo.put("fullName", firstName + " " + lastName);
 
-                    AsyncHandleLogin handleLogin = new AsyncHandleLogin();
-                    handleLogin.execute(userInfo);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                        AsyncHandleLogin handleLogin = new AsyncHandleLogin();
+                        handleLogin.execute(userInfo);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getContext(), "Please make sure both password fields match", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -152,6 +157,7 @@ public class RegisterFragment extends DialogFragment {
         protected String doInBackground(JSONObject... jsonObjects) {
             JSONObject userInfo = jsonObjects[0];
             HomeActivity.dao.registerHandler(userInfo);
+            HomeActivity.dao.loginHandler(userInfo);
             String result = "";
             return result;
         }

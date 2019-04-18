@@ -61,7 +61,6 @@ public class SleepEntryDAO {
             JSONObject userLoginInfo = new JSONObject();
             userLoginInfo.put("username", userInfo.getString("username"));
             userLoginInfo.put("password", userInfo.getString("password"));
-            loginHandler(userLoginInfo);
         } catch (JSONException e) {
             e.printStackTrace();
         }
