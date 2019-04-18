@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +40,7 @@ public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerLi
         viewHolder.textMoodRating.setText("Mood Rating: " +(String.valueOf(data.getWakeMoodRating())));
         viewHolder.textEntryDate.setText(data.getDate());
         viewHolder.textTimeSlept.setText("Time Slept: " + data.getTimeSlept() + " hours");
+        setEnterAnimation(viewHolder.parent, viewHolder);
         switch (data.getWakeMoodRating()){
             case 1:
                 viewHolder.imageViewGraph.setImageDrawable(viewHolder.parent.getContext().getDrawable(R.drawable.frown));
@@ -71,6 +74,11 @@ public class HomeRecyclerListAdapter extends RecyclerView.Adapter<HomeRecyclerLi
             }
         });
 
+    }
+
+    private void setEnterAnimation(View view, ViewHolder holder){
+        Animation animation = AnimationUtils.loadAnimation(view.getContext(), android.R.anim.slide_in_left);
+        view.startAnimation(animation);
     }
 
     @Override

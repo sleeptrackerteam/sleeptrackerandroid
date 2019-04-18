@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -98,6 +99,7 @@ public class NewEntryFragment extends Fragment {
         textTimeSlept = view.findViewById(R.id.text_view_time_slept);
 
         if(updatableEntry != null){
+            timeSlept = updatableEntry.getTimeSlept();
             textTimeSlept.setText("Time Slept: " + updatableEntry.getTimeSlept() + " hours");
             editDate.setText(updatableEntry.getDate());
             switch (updatableEntry.getWakeMoodRating()){
@@ -220,16 +222,20 @@ public class NewEntryFragment extends Fragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(HomeActivity.usersDao.getUserId() != 0) {
                 final SleepEntry entry = new SleepEntry(tiredRating, wakeRating, timeSlept, editDate.getText().toString());
                 final JSONObject entryJson = entry.toJson();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        int entryId = HomeActivity.dao.createEntry(entryJson);
-                        entry.setId(entryId);
-                        startActivity(new Intent(getContext(), HomeActivity.class));
-                    }
-                }).start();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int entryId = HomeActivity.dao.createEntry(entryJson);
+                            entry.setId(entryId);
+                            startActivity(new Intent(getContext(), HomeActivity.class));
+                        }
+                    }).start();
+                }else{
+                    Toast.makeText(getContext(), "Please login to submit an entry", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

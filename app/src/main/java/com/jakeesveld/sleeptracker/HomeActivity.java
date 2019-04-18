@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -31,6 +32,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
     HomeRecyclerListAdapter listAdapter;
     TextView textViewGreeting, textViewWarning;
     SleepGraph homeGraphView;
+    ProgressBar loadingCircle;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,6 +61,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         context = this;
         textViewGreeting = findViewById(R.id.text_view_greeting);
         textViewWarning = findViewById(R.id.text_login_warning);
+        loadingCircle = findViewById(R.id.loading_circle);
         dao = new SleepEntryDAO();
         usersDao = new UsersDAO(context);
         entryList = new ArrayList<>();
@@ -106,6 +109,7 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
         super.onResume();
         usersDao = new UsersDAO(context);
         if (usersDao.getUserId() != 0) {
+            loadingCircle.setVisibility(View.VISIBLE);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -130,14 +134,18 @@ public class HomeActivity extends AppCompatActivity implements NewEntryFragment.
                             textViewGreeting.setText(greetingText);
                             homeGraphView.setYEndings(averagesList);
                             textViewWarning.setVisibility(View.GONE);
+                            loadingCircle.setVisibility(View.GONE);
                         }
                     });
 
                 }
             }).start();
         }else{
+            textViewGreeting.setText("Hello!");
             entryList.clear();
+            listAdapter.notifyDataSetChanged();
             homeGraphView.resetGraph();
+            loadingCircle.setVisibility(View.GONE);
         }
     }
 
