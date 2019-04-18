@@ -68,6 +68,7 @@ public class NewEntryFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         if (getArguments() != null && getArguments().containsKey(SleepEntry.SLEEP_ENTRY_KEY)) {
             updatableEntry = (SleepEntry) getArguments().getSerializable(SleepEntry.SLEEP_ENTRY_KEY);
         }else{

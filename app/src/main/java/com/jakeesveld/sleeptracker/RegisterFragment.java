@@ -74,6 +74,11 @@ public class RegisterFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        try {
+            getDialog().getWindow().setWindowAnimations(R.style.WindowAnimationStyle);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
         return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
